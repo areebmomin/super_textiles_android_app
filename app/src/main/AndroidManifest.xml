@@ -4,18 +4,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:fullBackupContent="true"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperTextiles">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AddMetersActivity" />
+        <activity android:name=".AddChallanActivity" />
+        <activity android:name=".AboutUs" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateAlwaysVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible" />
     </application>
 
 </manifest>

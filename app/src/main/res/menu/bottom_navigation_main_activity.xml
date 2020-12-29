@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/challansOption"
+        android:title="@string/challans"
+        android:icon="@mipmap/challan"
+        />
+    <item
+        android:id="@+id/billsOption"
+        android:title="@string/bills"
+        android:icon="@mipmap/bill"
+        />
+    <item
+        android:id="@+id/reportOption"
+        android:title="@string/report"
+        android:icon="@mipmap/report"
+        />
+    <item
+        android:id="@+id/customersOption"
+        android:title="@string/customers"
+        android:icon="@mipmap/customer"
+        />
+    <item
+        android:id="@+id/moreOption"
+        android:title="@string/more"
+        android:icon="@mipmap/more"
+        />
+</menu>

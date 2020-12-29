@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutUs">
+
+    <TextView
+        android:id="@+id/businessTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/super_textiles"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/businessAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16sp"
+        android:text="@string/super_textiles_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessTextView"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/GSTIN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gstin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/businessAddress"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        />
+
+    <TextView
+        android:id="@+id/businessGstNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/super_textiles_gst_no"
+        app:layout_constraintStart_toEndOf="@id/GSTIN"
+        app:layout_constraintTop_toBottomOf="@id/businessAddress"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="GSTIN"
+        />
+
+    <TextView
+        android:id="@+id/bankDetailsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bank_details"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/GSTIN"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        />
+
+    <TextView
+        android:id="@+id/bankName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/bank_name"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bankDetailsTextView"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        />
+
+    <TextView
+        android:id="@+id/bankNameValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/hdfc_bank"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toEndOf="@+id/bankName"
+        app:layout_constraintTop_toBottomOf="@id/bankDetailsTextView"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Bank Name"
+        />
+
+    <TextView
+        android:id="@+id/branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/branch"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bankName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/branchName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/bhiwandi"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toEndOf="@id/branch"
+        app:layout_constraintTop_toBottomOf="@id/bankName"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Branch"
+        />
+
+    <TextView
+        android:id="@+id/accountNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/a_c_no"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/branch"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/accountNoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/_07338310001339"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toEndOf="@id/accountNo"
+        app:layout_constraintTop_toBottomOf="@id/branch"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="A/c No."
+        />
+
+    <TextView
+        android:id="@+id/ifscCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/ifsc_code"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accountNo"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/ifscCodeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/hdfc0000733"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toEndOf="@id/ifscCode"
+        app:layout_constraintTop_toBottomOf="@id/accountNo"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="IFSC Code"
+        />
+
+    <TextView
+        android:id="@+id/typeOfAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/type_of_a_c"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ifscCode"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/typeOfAccountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/current_a_c"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toEndOf="@id/typeOfAccount"
+        app:layout_constraintTop_toBottomOf="@id/ifscCode"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="A/c type"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
