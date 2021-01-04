@@ -10,8 +10,20 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperTextiles">
-        <activity android:name=".AddMetersActivity" />
-        <activity android:name=".AddChallanActivity" />
+        <activity android:name=".EditCustomerActivity" android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".ViewCustomerActivity" />
+        <activity android:name=".AddCustomerActivity" android:windowSoftInputMode="stateVisible" />
+        <activity android:name=".EditReportActivity" />
+        <activity android:name=".ViewReportActivity" />
+        <activity android:name=".EditBillActivity" />
+        <activity android:name=".ViewBillActivity" />
+        <activity android:name=".ChallanDetailsActivity" />
+        <activity
+            android:name=".AddMetersActivity"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".AddChallanActivity"
+            android:windowSoftInputMode="stateVisible" />
         <activity android:name=".AboutUs" />
         <activity
             android:name=".LoginActivity"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/changePasswordOption"
         android:title="@string/change_password"
@@ -11,5 +12,12 @@
     <item
         android:id="@+id/aboutUsOption"
         android:title="@string/about_us"
+        />
+    <item
+        android:id="@+id/searchOption"
+        android:title="@string/search_option"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
 </menu>

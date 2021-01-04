@@ -13,7 +13,8 @@
     <item
         android:id="@+id/reportOption"
         android:title="@string/report"
-        android:icon="@mipmap/report"
+        android:icon="@drawable/ic_report"
+        android:iconTint="@color/black"
         />
     <item
         android:id="@+id/customersOption"

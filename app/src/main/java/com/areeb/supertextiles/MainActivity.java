@@ -1,5 +1,6 @@
 package com.areeb.supertextiles;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,15 +15,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.ListFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,7 +62,15 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private final BottomNavigationView.OnNavigationItemReselectedListener navigationItemReselectedListener = item -> {
-
+        String title = item.getTitle().toString();
+        if (title.equals(getString(R.string.bills))) {
+            Intent intent = new Intent(MainActivity.this, ViewBillActivity.class);
+            startActivity(intent);
+        }
+        else if (title.equals(getString(R.string.report))) {
+            Intent intent = new Intent(MainActivity.this, ViewReportActivity.class);
+            startActivity(intent);
+        }
     };
 
     @Override
@@ -91,18 +102,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        //initialize searchView
+        MenuItem searchViewItem = menu.findItem(R.id.searchOption);
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+
+        if (searchManager != null) {
+            SearchView searchView = (SearchView) searchViewItem.getActionView();
+            searchView.setQueryHint("Search");
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(true);
+            searchView.setIconified(true);
+
+            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    Toast.makeText(MainActivity.this, newText, Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            };
+
+            searchView.setOnQueryTextListener(queryTextListener);
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        CharSequence title = item.getTitle();
-        if (getString(R.string.change_password).contentEquals(title)) {
+        String title = item.getTitle().toString();
+        if (getString(R.string.change_password).equals(title)) {
             showChangePasswordDialog();
-        } else if (getString(R.string.logout).contentEquals(title)) {
+        } else if (getString(R.string.logout).equals(title)) {
             //logout current signed in user
             logout();
-        } else if (getString(R.string.about_us).contentEquals(title)) {
+        } else if (getString(R.string.about_us).equals(title)) {
             //go to AboutUs Activity
             goToAboutUsActivity();
         }
@@ -152,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(v -> {
                 //get password from EditText
-                String newPassword = String.valueOf(newPasswordEditText.getEditText().getText());
+                String newPassword = String.valueOf(Objects.requireNonNull(newPasswordEditText.getEditText()).getText());
 
                 //check if password is empty
                 if (newPassword.isEmpty()) {

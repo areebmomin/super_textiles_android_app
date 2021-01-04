@@ -55,4 +55,126 @@
     <string name="design_2">Design 2:</string>
     <string name="design_3">Design 3:</string>
     <string name="design_4">Design 4:</string>
+    <string name="s_no">S.No.</string>
+    <string name="meter">Meter</string>
+    <string name="add_meter">Add Meter</string>
+    <string name="total_meters_text_view">Total Meters:</string>
+    <string name="add">Add</string>
+    <string name="_0">0</string>
+    <string name="shared_preference_name">com.areeb.supertextiles</string>
+    <string name="challan_pdf">Challan PDF</string>
+    <string name="edit_challan">Edit Challan</string>
+    <string name="challan_no_text_view">Challan No:</string>
+    <string name="date_text_view">Date:</string>
+    <string name="purchaser_text_view">Purchaser:</string>
+    <string name="lot_no_text_view">Lot No:</string>
+    <string name="l_r_no_text_view">L.R. No:</string>
+    <string name="delivery_at_text_view">Delivery At:</string>
+    <string name="purchaser_gstin_text_view">Purchaser GSTIN:</string>
+    <string name="quality_text_view">Quality:</string>
+    <string name="total_pieces_text_view">Total Pieces:</string>
+    <string name="fold_guaranteed_text_view">Fold/Guaranteed:</string>
+    <string name="design_1_text_view">Design 1:</string>
+    <string name="design_no_text_vew">Design No:</string>
+    <string name="color_text_view">Color:</string>
+    <string name="design_2_text_view">Design 2:</string>
+    <string name="design_3_text_view">Design 3:</string>
+    <string name="design_4_text_view">Design 4:</string>
+    <string name="bill_pdf">Bill PDF</string>
+    <string name="edit_bill">Edit Bill</string>
+    <string name="messers_text_view">Messers:</string>
+    <string name="address_text_view">Address:</string>
+    <string name="bill_no_text_view">Bill No:</string>
+    <string name="contract_no_text_view">Contract No:</string>
+    <string name="dated_text_view">Dated:</string>
+    <string name="broker_text_view">Broker:</string>
+    <string name="description_text_view">Description:</string>
+    <string name="no_of_pieces_text_view_bill">No. of Pieces:</string>
+    <string name="quantity_mts_kgs_text_view">Quantity (Mts/Kgs):</string>
+    <string name="rate_per_mts_kgs">Rate per Mts/Kgs:</string>
+    <string name="amount_bill_text_view">Amount:</string>
+    <string name="total_text_view">Total:</string>
+    <string name="discount_bill_text_view">Discount:</string>
+    <string name="discount_amt_bill_text_view">Discount Amt:</string>
+    <string name="net_amount_bill_text_view">Net Amount:</string>
+    <string name="sgst_bill_text_view">SGST @ 2.5%:</string>
+    <string name="cgst_bill_text_view">CGST @ 2.5%:</string>
+    <string name="igst_bill_text_view">IGST @ 5%:</string>
+    <string name="amt_after_tax_bill_text_view">Amt. after Tax:</string>
+    <string name="e_way_bill_no_text_view">E-Way Bill No:</string>
+    <string name="bill_no_edit_bill">Bill No. <font color='red'>*</font></string>
+    <string name="messers_edit_bill">Messers <font color='red'>*</font></string>
+    <string name="address_edit_bill">Address <font color='red'>*</font></string>
+    <string name="contract_no_edit_bill">Contract No.</string>
+    <string name="dated_edit_bill">Dated</string>
+    <string name="broker_edit_bill">Broker</string>
+    <string name="description_edit_bill">Description <font color='red'>*</font></string>
+    <string name="no_of_pieces_editBill">No. of pieces <font color='red'>*</font></string>
+    <string name="quantity_mts_kgs_edit_bill">Quantity (Mts/Kgs) <font color='red'>*</font></string>
+    <string name="rate_per_mts_kgs_edit_bill">Rate per Mts/Kgs <font color='red'>*</font></string>
+    <string name="amount_edit_bill">Amount <font color='red'>*</font></string>
+    <string name="quantity_after_discount_edit_bill">Quantity after Discount <font color='red'>*</font></string>
+    <string name="discount_on_quantity_edit_bill">Discount on Quantity</string>
+    <string name="total_edit_bill">Total <font color='red'>*</font></string>
+    <string name="discount_in_edit_bill">Discount in %</string>
+    <string name="discount_amount_edit_bill">Discount Amount</string>
+    <string name="net_amount_edit_bill">Net Amount <font color='red'>*</font></string>
+    <string name="sgst_edit_bill">SGST:</string>
+    <string name="cgst_edit_bill">CGST:</string>
+    <string name="igst_edit_bill">IGST:</string>
+    <string name="_2_5_sgst_edit_bill">2.5%</string>
+    <string name="_6_edit_bill">6%</string>
+    <string name="_5_edit_bill">5% </string>
+    <string name="_12_edit_bill">12%</string>
+    <string name="igst_amount_edit_bill">IGST Amount <font color='red'>*</font></string>
+    <string name="cgst_amount_edit_bill">CGST Amount <font color='red'>*</font></string>
+    <string name="sgst_amount_edit_bill">SGST Amount <font color='red'>*</font></string>
+    <string name="amount_after_tax_edit_bill">Amount after Tax <font color='red'>*</font></string>
+    <string name="e_way_bill_no_edit_bill">E-Way Bill No.</string>
+    <string name="report_pdf">Report PDF</string>
+    <string name="edit_report">Edit Report</string>
+    <string name="lot_no">Lot No:</string>
+    <string name="transport_text_view_report">Transport:</string>
+    <string name="party_text_view">Party:</string>
+    <string name="delivery_address_text_view">Delivery Address:</string>
+    <string name="pieces_text_view">Pieces:</string>
+    <string name="meters_text_view">Meters:</string>
+    <string name="design_no_text_view">Design No:</string>
+    <string name="amount_text_view">Amount:</string>
+    <string name="rate_text_view">Rate:</string>
+    <string name="gst_report_text_view">GST %:</string>
+    <string name="gst_amt_text_view">GST Amt:</string>
+    <string name="total_gst_amt_text_view">Total GST Amt:</string>
+    <string name="commission_text_view">Commission:</string>
+    <string name="net_amt_text_view">Net Amt:</string>
+    <string name="final_amt_text_view">Final Amt:</string>
+    <string name="received_amt_text_view">Received Amt:</string>
+    <string name="cheque_no_text_view">Cheque No:</string>
+    <string name="cheque_date_text_view">Cheque Date:</string>
+    <string name="party_edit_report">Party <font color='red'>*</font></string>
+    <string name="delivery_at_edit_report">Delivery Address <font color='red'>*</font></string>
+    <string name="pieces_edit_report">Pieces <font color='red'>*</font></string>
+    <string name="meters_edit_report">Meters <font color='red'>*</font></string>
+    <string name="rate_edit_report">Rate <font color='red'>*</font></string>
+    <string name="gst_edit_report">GST % <font color='red'>*</font></string>
+    <string name="commission_edit_report">Commission</string>
+    <string name="gst_amount_edit_report">GST Amount <font color='red'>*</font></string>
+    <string name="total_gst_amount_edit_report">Total GST Amount <font color='red'>*</font></string>
+    <string name="final_amount_edit_report">Final Amount <font color='red'>*</font></string>
+    <string name="received_amount_edit_report">Received Amount <font color='red'>*</font></string>
+    <string name="cheque_no_edit_report">Cheque No.</string>
+    <string name="cheque_date_edit_report">Cheque Date</string>
+    <string name="transport_edit_report">Transport</string>
+    <string name="name_add_customer">Name <font color='red'>*</font></string>
+    <string name="address_add_customer">Address <font color='red'>*</font></string>
+    <string name="gst_no_add_customer">GST No. <font color='red'>*</font></string>
+    <string name="address">Address</string>
+    <string name="delivery_address_add_customer">Delivery Address</string>
+    <string name="add_button">Add</string>
+    <string name="add_customer">Add Customer</string>
+    <string name="name_text_view">Name:</string>
+    <string name="gst_no_view_customer">GST No:</string>
+    <string name="delivery_address_view_customer">Delivery Address:</string>
+    <string name="edit_customer_option">Edit Customer</string>
+    <string name="search_option">Search</string>
 </resources>

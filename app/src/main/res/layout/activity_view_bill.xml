@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ViewBillActivity">
+
+    <TextView
+        android:id="@+id/billNoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/bill_no_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/billNoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/billNoTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2546"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Bill No"
+        />
+
+    <TextView
+        android:id="@+id/billDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/date_text_view"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/billDateValueTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/billDateValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12/12/2020"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Date"
+        />
+
+    <TextView
+        android:id="@+id/billChallanNoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/challan_no_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/billNoTextView" />
+
+    <TextView
+        android:id="@+id/billChallanNoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/billChallanNoTextView"
+        app:layout_constraintTop_toBottomOf="@id/billNoTextView"
+        tools:text="2546"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Challan No"
+        />
+
+    <TextView
+        android:id="@+id/EWayBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/e_way_bill_no_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/billChallanNoTextView"
+        />
+
+    <TextView
+        android:id="@+id/EWayBillValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/EWayBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/billChallanNoTextView"
+        tools:text="271783"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="E-Way"
+        />
+
+    <View
+        android:id="@+id/viewBillDividerOne"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/EWayBillTextView" />
+
+    <TextView
+        android:id="@+id/messersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/messers_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerOne" />
+
+    <TextView
+        android:id="@+id/messersValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/messersTextView"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerOne"
+        tools:text="karni Saree"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Messers"
+        />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/address_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messersTextView" />
+
+    <TextView
+        android:id="@+id/addressValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/addressTextView"
+        app:layout_constraintTop_toBottomOf="@id/messersTextView"
+        tools:text="Sainath Dyeing, Dombivali"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Address"
+        />
+
+    <TextView
+        android:id="@+id/purchaserGSTBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/purchaser_gstin_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressTextView" />
+
+    <TextView
+        android:id="@+id/purchaserGSTValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/purchaserGSTBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/addressTextView"
+        tools:text="27AABHJ9610C1ZK"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="GST"
+        />
+
+    <View
+        android:id="@+id/viewBillDividerTwo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/purchaserGSTBillTextView" />
+
+    <TextView
+        android:id="@+id/contractNoBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/contract_no_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerTwo" />
+
+    <TextView
+        android:id="@+id/contractNoBillValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/contractNoBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerTwo"
+        tools:text="2546"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Contract"
+        />
+
+    <TextView
+        android:id="@+id/billDatedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/dated_text_view"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/billDatedValueTextView"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerTwo" />
+
+    <TextView
+        android:id="@+id/billDatedValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerTwo"
+        tools:text="12/12/2020"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Dated"
+        />
+
+    <TextView
+        android:id="@+id/brokerBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/broker_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contractNoBillTextView" />
+
+    <TextView
+        android:id="@+id/brokerNameBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/brokerBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/contractNoBillTextView"
+        tools:text="2546"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Broker"
+        />
+
+    <View
+        android:id="@+id/viewBillDividerThree"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/brokerBillTextView" />
+
+    <TextView
+        android:id="@+id/descriptionBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/description_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerThree" />
+
+    <TextView
+        android:id="@+id/descriptionBillValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/descriptionBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerThree"
+        tools:text="Border Butta"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Description"
+        />
+
+    <TextView
+        android:id="@+id/noOfPiecesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/no_of_pieces_text_view_bill"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionBillTextView" />
+
+    <TextView
+        android:id="@+id/noOfPiecesValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/noOfPiecesTextView"
+        app:layout_constraintTop_toBottomOf="@id/descriptionBillTextView"
+        tools:text="50"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Pieces"
+        />
+
+    <TextView
+        android:id="@+id/quantityBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/quantity_mts_kgs_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noOfPiecesTextView" />
+
+    <TextView
+        android:id="@+id/quantityValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/quantityBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/noOfPiecesTextView"
+        tools:text="27"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Quantity"
+        />
+
+    <TextView
+        android:id="@+id/rateBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/rate_per_mts_kgs"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quantityBillTextView" />
+
+    <TextView
+        android:id="@+id/rateValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/rateBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/quantityBillTextView"
+        tools:text="27"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Rate"
+        />
+
+    <TextView
+        android:id="@+id/amountBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/amount_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rateBillTextView" />
+
+    <TextView
+        android:id="@+id/amountValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/amountBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/rateBillTextView"
+        tools:text="27,54,783"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Amount"
+        />
+
+    <View
+        android:id="@+id/viewBillDividerFour"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/amountBillTextView" />
+
+    <TextView
+        android:id="@+id/totalBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/total_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerFour" />
+
+    <TextView
+        android:id="@+id/totalValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/totalBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/viewBillDividerFour"
+        tools:text="27,54,783"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Total"
+        />
+
+    <TextView
+        android:id="@+id/discountBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/discount_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalBillTextView" />
+
+    <TextView
+        android:id="@+id/discountBillValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/discountBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/totalBillTextView"
+        tools:text="6%"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Discount"
+        />
+
+    <TextView
+        android:id="@+id/discountAmountBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/discount_amt_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/discountAmountValueBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/totalBillTextView" />
+
+    <TextView
+        android:id="@+id/discountAmountValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalBillTextView"
+        tools:text="12,020"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Discount"
+        />
+
+    <TextView
+        android:id="@+id/netAmountBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/net_amount_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/discountBillTextView" />
+
+    <TextView
+        android:id="@+id/netAmountValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/netAmountBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/discountBillTextView"
+        tools:text="27,54,783"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Net"
+        />
+
+    <TextView
+        android:id="@+id/SGSTBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/sgst_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/netAmountBillTextView" />
+
+    <TextView
+        android:id="@+id/SGSTValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/SGSTBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/netAmountBillTextView"
+        tools:text="-"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="SGST"
+        />
+
+    <TextView
+        android:id="@+id/CGSTBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/cgst_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/CGSTValueBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/netAmountBillTextView" />
+
+    <TextView
+        android:id="@+id/CGSTValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/netAmountBillTextView"
+        tools:text="-"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="CGST"
+        />
+
+    <TextView
+        android:id="@+id/IGSTBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/igst_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SGSTBillTextView" />
+
+    <TextView
+        android:id="@+id/IGSTValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/IGSTBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/SGSTBillTextView"
+        tools:text="12,108"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="IGST"
+        />
+
+    <TextView
+        android:id="@+id/amountAfterTaxBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/amt_after_tax_bill_text_view"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IGSTBillTextView" />
+
+    <TextView
+        android:id="@+id/amountAfterTaxValueBillTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toEndOf="@id/amountAfterTaxBillTextView"
+        app:layout_constraintTop_toBottomOf="@id/IGSTBillTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="27,54,783"
+        android:background="?android:selectableItemBackground"
+        android:enabled="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:tag="Amount"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

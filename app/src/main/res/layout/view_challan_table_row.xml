@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/black">
+
+    <TextView
+        android:id="@+id/SNoTableColumn"
+        android:background="@android:color/white"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="14sp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        />
+
+    <TextView
+        android:id="@+id/meterTableColumn"
+        android:background="@android:color/white"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="14sp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="1dp"
+        />
+</TableRow>

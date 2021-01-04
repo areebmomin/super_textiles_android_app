@@ -24,6 +24,10 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
+import static com.areeb.supertextiles.AddChallanActivity.showErrorInTextField;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_HINT = 58;
@@ -47,8 +51,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //initialize firebase auth
         mAuth = FirebaseAuth.getInstance();
-
-
     }
 
     @Override
@@ -74,27 +76,24 @@ public class LoginActivity extends AppCompatActivity {
     //enter button on click method
     public void loginUser(View view) {
         //get email and password from edit texts
-        String email = emailTextField.getEditText().getText().toString();
-        String password = passwordTextField.getEditText().getText().toString();
+        String email = Objects.requireNonNull(emailTextField.getEditText()).getText().toString();
+        String password = Objects.requireNonNull(passwordTextField.getEditText()).getText().toString();
 
         //check if email is blank
-        if (email.isEmpty() || email == null) {
-            emailTextField.getEditText().requestFocus();
-            emailTextField.getEditText().setError("Email cannot be empty");
+        if (email.isEmpty()) {
+            showErrorInTextField(emailTextField, "Email cannot be empty");
             return;
         }
 
         //check if password is blank
-        if (password.isEmpty() || password == null) {
-            passwordTextField.getEditText().requestFocus();
-            passwordTextField.getEditText().setError("Password cannot be empty");
+        if (password.isEmpty()) {
+            showErrorInTextField(passwordTextField, "Password cannot be empty");
             return;
         }
 
         //check is password is less than 6 characters
         if (password.length() < 6) {
-            passwordTextField.getEditText().requestFocus();
-            passwordTextField.getEditText().setError("Password must have 6 characters");
+            showErrorInTextField(passwordTextField, "Password must have 6 characters");
             return;
         }
 
@@ -106,8 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         //hide keyboard if open
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(enterButton.getWindowToken(), 0);
+                        hideSoftKeyboard(this, enterButton);
 
                         //hide ProgressBar
                         loginProgressBar.setVisibility(View.INVISIBLE);
@@ -131,17 +129,24 @@ public class LoginActivity extends AppCompatActivity {
 //        inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 //    }
 
+    //hide soft keyboard method
+    public static void hideSoftKeyboard(Context context, View view) {
+        //hide keyboard if open
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_HINT) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK && data != null) {
                 //get data in credential
                 Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
 
                 //set email id in email text field
-                emailTextField.getEditText().setText(credential.getId());
+                Objects.requireNonNull(emailTextField.getEditText()).setText(credential.getId());
 
                 //set focus on password text field
                 passwordTextField.requestFocus();

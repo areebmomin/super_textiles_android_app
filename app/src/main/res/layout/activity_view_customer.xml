@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewCustomerActivity">
+
+    <LinearLayout
+        android:id="@+id/nameViewCustomerLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addressViewCustomerLinearLayout"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        >
+
+        <TextView
+            android:id="@+id/nameViewCustomerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/name_text_view"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/nameViewCustomerValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif"
+            android:textSize="14sp"
+            tools:text="karni Saree"
+            android:background="?android:selectableItemBackground"
+            android:enabled="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:tag="name"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addressViewCustomerLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameViewCustomerLinearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/GSTNoViewCustomerLinearLayout"
+        >
+
+        <TextView
+            android:id="@+id/addressViewCustomerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/address_text_view"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/addressViewCustomerValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif"
+            android:textSize="14sp"
+            tools:text="Mumbai"
+            android:background="?android:selectableItemBackground"
+            android:enabled="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:tag="name"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/GSTNoViewCustomerLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressViewCustomerLinearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/deliveryAddressViewCustomerTextView"
+        >
+
+        <TextView
+            android:id="@+id/GSTNoViewCustomerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/gst_no_view_customer"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/GStNoViewCustomerValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            tools:text="27AVBIIUGV9873"
+            android:background="?android:selectableItemBackground"
+            android:enabled="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:tag="name"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/deliveryAddressViewCustomerTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/delivery_address_view_customer"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/GSTNoViewCustomerLinearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/viewCustomerTableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TableLayout
+        android:id="@+id/viewCustomerTableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/black"
+        android:stretchColumns="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deliveryAddressViewCustomerTextView"
+        >
+
+        <TableRow
+            android:layout_margin="1dp"
+            android:background="@android:color/black">
+
+            <TextView
+                android:layout_marginEnd="1dp"
+                android:background="@android:color/white"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/s_no"
+                android:textSize="14sp" />
+
+            <TextView
+                android:background="@android:color/white"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/address"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                />
+        </TableRow>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,7 +37,37 @@
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/totalPiecesTextView"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="23" />
+            android:text="@string/_0"/>
+
+        <TextView
+            android:id="@+id/totalMetersTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/total_meters_text_view"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalPiecesTextView" />
+
+        <TextView
+            android:id="@+id/totalMetersValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:selectableItemBackground"
+            android:enabled="true"
+            android:focusable="true"
+            android:fontFamily="sans-serif"
+            android:longClickable="true"
+            android:tag="Total Pieces"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/totalMetersTextView"
+            app:layout_constraintTop_toBottomOf="@id/totalPiecesTextView"
+            android:text="@string/_0"
+            />
 
         <TextView
             android:id="@+id/noOfDesignTextView"
@@ -49,7 +79,7 @@
             android:text="@string/no_of_designs"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/totalPiecesTextView" />
+            app:layout_constraintTop_toBottomOf="@id/totalMetersTextView" />
 
         <RadioGroup
             android:layout_width="0dp"
@@ -59,7 +89,7 @@
             android:checkedButton="@id/radioButtonOne"
             android:orientation="horizontal"
             app:layout_constraintStart_toEndOf="@id/noOfDesignTextView"
-            app:layout_constraintTop_toBottomOf="@id/totalPiecesTextView">
+            app:layout_constraintTop_toBottomOf="@id/totalMetersTextView">
 
             <RadioButton
                 android:id="@+id/radioButtonOne"
@@ -111,10 +141,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/design1TextView"
@@ -124,9 +151,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/design_1"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addMetersDividerOne" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/designNoOneTextField"
@@ -137,10 +162,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/design_no_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/design1TextView">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -158,10 +180,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/color_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/designNoOneTextField">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -170,6 +189,81 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TableLayout
+                android:id="@+id/designOneTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:stretchColumns="1"
+                android:background="@android:color/black"
+                >
+<!--                Heading row-->
+                <TableRow
+                    android:background="@android:color/black"
+                    android:layout_margin="1dp"
+                    >
+                    <TextView
+                        android:text="@string/s_no"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginEnd="1dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:text="@string/meter"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/designOneAddMeterTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_meter"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/designOneAddButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add"
+                    android:layout_gravity="center"
+                    android:onClick="designOneAddButtonOnClick"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -193,10 +287,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/design2TextView"
@@ -206,9 +297,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/design_2"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addMetersDividerTwo" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/designNoTwoTextField"
@@ -219,10 +308,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/design_no_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/design2TextView">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -240,10 +326,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/color_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/designNoTwoTextField">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -252,6 +335,80 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+              <TableLayout
+                android:id="@+id/designTwoTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:stretchColumns="1"
+                android:background="@android:color/black"
+                >
+<!--                Heading row-->
+                <TableRow
+                    android:background="@android:color/black"
+                    android:layout_margin="1dp"
+                    >
+                    <TextView
+                        android:text="@string/s_no"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginEnd="1dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:text="@string/meter"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/designTwoAddMeterTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_meter"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/designTwoAddButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add"
+                    android:layout_gravity="center"
+                    android:onClick="designTwoAddButtonOnClick"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
         <!--        Design No 3 starts here-->
@@ -274,10 +431,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/design3TextView"
@@ -287,9 +441,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/design_3"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addMetersDividerThree" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/designNoThreeTextField"
@@ -300,10 +452,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/design_no_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/design3TextView">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -321,10 +470,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/color_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/designNoThreeTextField">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -332,6 +478,82 @@
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TableLayout
+                android:id="@+id/designThreeTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:stretchColumns="1"
+                android:background="@android:color/black"
+                >
+                <!--                Heading row-->
+                <TableRow
+                    android:background="@android:color/black"
+                    android:layout_margin="1dp"
+                    >
+                    <TextView
+                        android:text="@string/s_no"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginEnd="1dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:text="@string/meter"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/designThreeAddMeterTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_meter"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/designThreeAddButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add"
+                    android:layout_gravity="center"
+                    android:onClick="designThreeAddButtonOnClick"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -357,10 +579,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/design4TextView"
@@ -370,9 +589,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/design_4"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addMetersDividerFour" />
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/designNoFourTextField"
@@ -383,10 +600,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/design_no_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/design4TextView">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -404,10 +618,7 @@
                 android:layout_marginEnd="32dp"
                 android:hint="@string/color_text_field"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeErrorColor="?attr/colorError"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/designNoFourTextField">
+                app:boxStrokeErrorColor="?attr/colorError">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -415,6 +626,82 @@
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TableLayout
+                android:id="@+id/designFourTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:stretchColumns="1"
+                android:background="@android:color/black"
+                >
+                <!--                Heading row-->
+                <TableRow
+                    android:background="@android:color/black"
+                    android:layout_margin="1dp"
+                    >
+                    <TextView
+                        android:text="@string/s_no"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginEnd="1dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:text="@string/meter"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:background="@android:color/white"
+                        android:textStyle="bold"
+                        />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/designFourAddMeterTextField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_meter"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/designFourAddButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add"
+                    android:layout_gravity="center"
+                    android:onClick="designFourAddButtonOnClick"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 

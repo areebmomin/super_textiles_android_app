@@ -30,8 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:focusable="false"
-                android:clickable="false"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -170,8 +168,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:focusable="false"
-                android:clickable="false"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -193,7 +189,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textCapWords" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -209,12 +205,14 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/qualityTextField">
+            app:layout_constraintTop_toBottomOf="@id/qualityTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -229,7 +227,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/totalPiecesTextField">
+            app:layout_constraintTop_toBottomOf="@id/totalPiecesTextField"
+            android:enabled="false"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
