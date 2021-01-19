@@ -12,4 +12,7 @@
     <color name="design_2_challan_pdf">#5C6BC0</color>
     <color name="design_3_challan_pdf">#66BB6A</color>
     <color name="design_4_challan_pdf">#FFA726</color>
+
+    <color name="swipe_delete_background">#D32F2F</color>
+    <color name="swipe_edit_background">#689F38</color>
 </resources>

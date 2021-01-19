@@ -650,24 +650,6 @@ public class AddChallanActivity extends AppCompatActivity {
         return true;
     }
 
-    //method to get all the design number based on number of designs selected
-    private String getAllDesignNumbers() {
-        if (numberOfDesigns == 1) {
-            return design1.getDesign_no();
-        }
-        else if (numberOfDesigns == 2) {
-            return design1.getDesign_no() + ", " + design2.getDesign_no();
-        }
-        else if (numberOfDesigns == 3) {
-            return design1.getDesign_no() + ", " + design2.getDesign_no() + ", " + design3.getDesign_no();
-        }
-        else if (numberOfDesigns == 4) {
-            return design1.getDesign_no() + ", " + design2.getDesign_no() + ", " + design3.getDesign_no() + ", " + design4.getDesign_no();
-        }
-
-        return "";
-    }
-
     //method to add design data in intent
     private void addDesignDataInIntent(Intent intent) {
         if (numberOfDesigns == 1) {
