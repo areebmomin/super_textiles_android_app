@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="design_1_challan_pdf">#EF5350</color>
+    <color name="design_2_challan_pdf">#5C6BC0</color>
+    <color name="design_3_challan_pdf">#66BB6A</color>
+    <color name="design_4_challan_pdf">#FFA726</color>
 </resources>

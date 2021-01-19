@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.models.Customer;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -21,10 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.areeb.supertextiles.AddChallanActivity.showErrorInTextField;
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getAllCustomersReference;
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
-import static com.areeb.supertextiles.LoginActivity.hideSoftKeyboard;
+import static com.areeb.supertextiles.activities.AddChallanActivity.showErrorInTextField;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getAllCustomersReference;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
+import static com.areeb.supertextiles.activities.LoginActivity.hideSoftKeyboard;
 
 public class AddCustomerActivity extends AppCompatActivity {
 
@@ -32,6 +34,7 @@ public class AddCustomerActivity extends AppCompatActivity {
             deliveryAddressAddCustomerTextField;
     TableLayout addCustomerTableLayout;
     DatabaseReference addCustomerDatabaseReference, addDeliveryAddressDatabaseReference;
+    ConstraintLayout addCustomerParent;
     ArrayList<String> deliveryAddressList;
 
     @Override
@@ -46,6 +49,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         GSTNoAddCustomerTextField = findViewById(R.id.GSTNoAddCustomerTextField);
         deliveryAddressAddCustomerTextField = findViewById(R.id.deliveryAddressAddCustomerTextField);
         addCustomerTableLayout = findViewById(R.id.addCustomerTableLayout);
+        addCustomerParent = findViewById(R.id.addCustomerParent);
 
         //initialize DatabaseReference
         addCustomerDatabaseReference = getAllCustomersReference();
@@ -125,6 +129,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         //add values to customer object
         customer.setId(id);
         customer.setName(name);
+        customer.setNameLowerCase(name.toLowerCase());
         customer.setAddress(address);
         customer.setGSTNo(GST);
 
@@ -158,7 +163,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         deliveryAddressAddCustomerTextField.getEditText().getText().clear();
 
         //initialize new row in table
-        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.add_customer_table_row, null);
+        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.add_customer_table_row, addCustomerParent, false);
 
         //initialize TextView as Table column
         TextView SRNOTableColumn = tableRow.findViewById(R.id.SNoTableColumn);

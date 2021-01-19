@@ -1,9 +1,12 @@
 package com.areeb.supertextiles.models;
 
+import java.util.ArrayList;
+
 public class Challan {
     private String challan_no;
     private String date;
     private String purchaser;
+    private String purchaser_lower_case;
     private String lot_no;
     private String lr_no;
     private String delivery_at;
@@ -13,9 +16,11 @@ public class Challan {
     private String total_meters;
     private String fold;
     private String no_of_designs;
+    private String purchaser_address;
+    private ArrayList<String> design_no_list;
 
     public Challan() {
-
+        design_no_list = new ArrayList<>();
     }
 
     public String getChallan_no() {
@@ -122,4 +127,27 @@ public class Challan {
         this.no_of_designs = no_of_designs;
     }
 
+    public String getPurchaser_address() {
+        return purchaser_address;
+    }
+
+    public void setPurchaser_address(String purchaser_address) {
+        this.purchaser_address = purchaser_address;
+    }
+
+    public ArrayList<String> getDesign_no_list() {
+        return design_no_list;
+    }
+
+    public void setDesign_no_list(ArrayList<String> design_no_list) {
+        this.design_no_list = design_no_list;
+    }
+
+    public String getPurchaser_lower_case() {
+        return purchaser_lower_case;
+    }
+
+    public void setPurchaser_lower_case(String purchaser_lower_case) {
+        this.purchaser_lower_case = purchaser_lower_case;
+    }
 }

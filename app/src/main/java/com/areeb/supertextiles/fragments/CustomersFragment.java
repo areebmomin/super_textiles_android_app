@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,20 +11,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.areeb.supertextiles.activities.AddCustomerActivity;
+import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.adapters.CustomersAdapter;
+import com.areeb.supertextiles.interfaces.SearchInCustomer;
 import com.areeb.supertextiles.models.Customer;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getAllCustomersReference;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getAllCustomersReference;
 
-public class CustomersFragment extends Fragment {
+public class CustomersFragment extends Fragment implements SearchInCustomer {
 
     RecyclerView customersRecyclerView;
     DatabaseReference customersListDatabaseReference;
     CustomersAdapter customersAdapter;
     FloatingActionButton addCustomerButton;
+    FirebaseRecyclerOptions<Customer> customerFirebaseRecyclerOptions;
 
     public CustomersFragment() {
         // Required empty public constructor
@@ -81,5 +86,19 @@ public class CustomersFragment extends Fragment {
     public void onStop() {
         super.onStop();
         customersAdapter.stopListening();
+    }
+
+    @Override
+    public void onSearchInCustomer(Query firebaseSearchQuery, RecyclerView customersRecyclerView) {
+        if (customersRecyclerView != null) {
+            customerFirebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<Customer>()
+                    .setQuery(firebaseSearchQuery, Customer.class)
+                    .build();
+
+            customersAdapter = new CustomersAdapter(customerFirebaseRecyclerOptions, getContext());
+            customersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            customersRecyclerView.setAdapter(customersAdapter);
+            customersAdapter.startListening();
+        }
     }
 }

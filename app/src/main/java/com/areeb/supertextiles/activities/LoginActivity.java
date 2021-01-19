@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.activities;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.areeb.supertextiles.R;
 import com.google.android.gms.auth.api.credentials.Credential;
 import com.google.android.gms.auth.api.credentials.CredentialPickerConfig;
 import com.google.android.gms.auth.api.credentials.Credentials;
@@ -26,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-import static com.areeb.supertextiles.AddChallanActivity.showErrorInTextField;
+import static com.areeb.supertextiles.activities.AddChallanActivity.showErrorInTextField;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.fragments;
 
 import android.os.Bundle;
 
@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BillsFragment extends Fragment {
+import com.areeb.supertextiles.R;
 
-    public BillsFragment() {
+public class MoreFragment extends Fragment {
+
+    public MoreFragment() {
         // Required empty public constructor
     }
 
@@ -24,8 +26,7 @@ public class BillsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bills, container, false);
+        return inflater.inflate(R.layout.fragment_more, container, false);
     }
 }

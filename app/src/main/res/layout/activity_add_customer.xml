@@ -6,9 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addCustomerParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".AddCustomerActivity">
+        tools:context=".activities.AddCustomerActivity">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameAddCustomerTextField"

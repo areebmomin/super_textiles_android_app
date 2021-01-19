@@ -9,20 +9,20 @@
     <string name="new_password">New Password</string>
     <string name="change">Change</string>
     <string name="super_textiles">Super Textiles</string>
-    <string name="super_textiles_address">H. No. 150, Khajoorpura, Gauripada, Bhiwandi- 421302. Dist. Thane.</string>
+    <string name="business_address">H. No. 150, Khajoorpura, Gauripada, Bhiwandi- 421302. Dist. Thane.</string>
     <string name="gstin">GSTIN:</string>
-    <string name="super_textiles_gst_no">27ALNPM4634N1ZG</string>
+    <string name="business_gst_no">27ALNPM4634N1ZG</string>
     <string name="bank_details"><u>Bank Details:</u></string>
     <string name="bank_name">Bank Name:</string>
-    <string name="hdfc_bank">HDFC Bank</string>
+    <string name="business_bank_name_value">HDFC Bank</string>
     <string name="branch">Branch:</string>
-    <string name="bhiwandi">Bhiwandi</string>
+    <string name="business_branch_name_value">Bhiwandi</string>
     <string name="a_c_no">A/c No:</string>
-    <string name="_07338310001339">07338310001339</string>
+    <string name="business_account_no_value">07338310001339</string>
     <string name="ifsc_code">IFSC Code:</string>
-    <string name="hdfc0000733">HDFC0000733</string>
+    <string name="business_ifsc_code_value">HDFC0000733</string>
     <string name="type_of_a_c">Type of A/c:</string>
-    <string name="current_a_c">Current A/c</string>
+    <string name="business_bank_account_type_value">Current A/c</string>
     <string name="challans">Challans</string>
     <string name="bills">Bills</string>
     <string name="report">Report</string>
@@ -50,8 +50,8 @@
     <string name="_3">3</string>
     <string name="_4">4</string>
     <string name="design_1">Design 1:</string>
-    <string name="design_no_text_field">Design No. <font color='red'>*</font></string>
-    <string name="color_text_field">Color <font color='red'>*</font></string>
+    <string name="design_no_text_field">Design No.</string>
+    <string name="color_text_field">Color</string>
     <string name="design_2">Design 2:</string>
     <string name="design_3">Design 3:</string>
     <string name="design_4">Design 4:</string>
@@ -93,12 +93,12 @@
     <string name="rate_per_mts_kgs">Rate per Mts/Kgs:</string>
     <string name="amount_bill_text_view">Amount:</string>
     <string name="total_text_view">Total:</string>
-    <string name="discount_bill_text_view">Discount:</string>
+    <string name="discount_bill_text_view">Discount %:</string>
     <string name="discount_amt_bill_text_view">Discount Amt:</string>
     <string name="net_amount_bill_text_view">Net Amount:</string>
-    <string name="sgst_bill_text_view">SGST @ 2.5%:</string>
-    <string name="cgst_bill_text_view">CGST @ 2.5%:</string>
-    <string name="igst_bill_text_view">IGST @ 5%:</string>
+    <string name="sgst_bill_text_view" formatted="false">SGST @ %s%%:</string>
+    <string name="cgst_bill_text_view" formatted="false">CGST @ %s%%:</string>
+    <string name="igst_bill_text_view" formatted="false">IGST @ %s%%:</string>
     <string name="amt_after_tax_bill_text_view">Amt. after Tax:</string>
     <string name="e_way_bill_no_text_view">E-Way Bill No:</string>
     <string name="bill_no_edit_bill">Bill No. <font color='red'>*</font></string>
@@ -160,7 +160,7 @@
     <string name="gst_amount_edit_report">GST Amount <font color='red'>*</font></string>
     <string name="total_gst_amount_edit_report">Total GST Amount <font color='red'>*</font></string>
     <string name="final_amount_edit_report">Final Amount <font color='red'>*</font></string>
-    <string name="received_amount_edit_report">Received Amount <font color='red'>*</font></string>
+    <string name="received_amount_edit_report">Received Amount</string>
     <string name="cheque_no_edit_report">Cheque No.</string>
     <string name="cheque_date_edit_report">Cheque Date</string>
     <string name="transport_edit_report">Transport</string>
@@ -177,4 +177,18 @@
     <string name="delivery_address_view_customer">Delivery Address:</string>
     <string name="edit_customer_option">Edit Customer</string>
     <string name="search_option">Search</string>
+    <string name="discount_on_quantity_mts_kgs">Discount on Quantity (Mts/Kgs):</string>
+    <string name="quantity_after_discount_mts_kgs">Quantity After Discount (Mts/Kgs):</string>
+    <string name="discount">Discount %:</string>
+    <string name="discount_edit_report">Discount % </string>
+    <string name="pending_amt">Pending Amt: %1$s</string>
+    <string name="challan_no_column">Challan No.</string>
+    <string name="bottom_description_heading_challan">Subject to Bhiwandi Jurisdiction</string>
+    <string name="bottom_description_line_1_challan">Receiver\'s Signature with Rubber Stamp Status:</string>
+    <string name="bottom_description_line_2_challan">1) Complaints &amp; Claims for shortage in quality or weight to be notified</string>
+    <string name="bottom_description_line_3_challan">within 24 hrs. Receipt of goods any claim there after will not be entertained.</string>
+    <string name="bottom_description_line_4_challan">2) Our risk &amp; responsibility ceases delivery of goods to carrier.</string>
+    <string name="bill_bottom_description_line_1">N.B.) 1) our responsibility ceases when the good have left out premises. 2) All the goods are checked</string>
+    <string name="bill_bottom_description_line_2">twice before dispatched. 3) If delivery of good is not taken within three days we have fully authority to</string>
+    <string name="bill_bottom_description_line_3">deliver or not to deliver. 4) Goods once sold will not be taken back.</string>
 </resources>

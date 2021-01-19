@@ -11,17 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.areeb.supertextiles.MainActivity;
 import com.areeb.supertextiles.R;
-import com.areeb.supertextiles.ViewCustomerActivity;
+import com.areeb.supertextiles.activities.ViewCustomerActivity;
 import com.areeb.supertextiles.models.Customer;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_ADDRESS;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_GST_NO;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_ID;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_NAME;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_ADDRESS;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_GST_NO;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_ID;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_NAME;
 
 public class CustomersAdapter extends FirebaseRecyclerAdapter<Customer, CustomersAdapter.CustomersViewHolder> {
 

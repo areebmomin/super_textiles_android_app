@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.activities;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.areeb.supertextiles.R;
 
 public class AboutUs extends AppCompatActivity {
 

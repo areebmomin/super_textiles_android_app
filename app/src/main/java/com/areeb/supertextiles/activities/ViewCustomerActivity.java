@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.areeb.supertextiles.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,8 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.areeb.supertextiles.AboutUs.getTextViewLongClickListener;
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReferenceByID;
+import static com.areeb.supertextiles.activities.AboutUs.getTextViewLongClickListener;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReferenceByID;
 
 public class ViewCustomerActivity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class ViewCustomerActivity extends AppCompatActivity {
     TextView nameViewCustomerValueTextView, addressViewCustomerValueTextView, GStNoViewCustomerValueTextView;
     String customerID, customerName, customerAddress, customerGSTNo;
     DatabaseReference deliveryAddressDatabaseReference;
+    ConstraintLayout viewCustomerParent;
     TableLayout viewCustomerTableLayout;
     ArrayList<String> deliveryAddressList;
 
@@ -45,6 +48,7 @@ public class ViewCustomerActivity extends AppCompatActivity {
         addressViewCustomerValueTextView = findViewById(R.id.addressViewCustomerValueTextView);
         GStNoViewCustomerValueTextView = findViewById(R.id.GStNoViewCustomerValueTextView);
         viewCustomerTableLayout = findViewById(R.id.viewCustomerTableLayout);
+        viewCustomerParent = findViewById(R.id.viewCustomerParent);
 
         //copy text to clipboard when onLongPress on TextView
         nameViewCustomerValueTextView.setOnLongClickListener(getTextViewLongClickListener(this));
@@ -123,7 +127,7 @@ public class ViewCustomerActivity extends AppCompatActivity {
 
     private void addDeliveryAddressToTable(String deliveryAddress) {
         //initialize new row in table
-        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.view_customer_table_row, null);
+        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.view_customer_table_row, viewCustomerParent, false);
 
         //initialize TextView as Table column
         TextView SRNOTableColumn = tableRow.findViewById(R.id.SNoTableColumn);

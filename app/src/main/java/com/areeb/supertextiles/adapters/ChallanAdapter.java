@@ -11,24 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.areeb.supertextiles.ChallanDetailsActivity;
+import com.areeb.supertextiles.activities.ChallanDetailsActivity;
 import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.models.Challan;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.gson.Gson;
 
-import static com.areeb.supertextiles.ChallanDetailsActivity.CHALLAN_NO;
-import static com.areeb.supertextiles.ChallanDetailsActivity.CHALLAN_DATE;
-import static com.areeb.supertextiles.ChallanDetailsActivity.PURCHASER;
-import static com.areeb.supertextiles.ChallanDetailsActivity.LOT_NO;
-import static com.areeb.supertextiles.ChallanDetailsActivity.LR_NO;
-import static com.areeb.supertextiles.ChallanDetailsActivity.DELIVERY_AT;
-import static com.areeb.supertextiles.ChallanDetailsActivity.PURCHASER_GST;
-import static com.areeb.supertextiles.ChallanDetailsActivity.QUALITY;
-import static com.areeb.supertextiles.ChallanDetailsActivity.TOTAL_PIECES;
-import static com.areeb.supertextiles.ChallanDetailsActivity.TOTAL_METERS;
-import static com.areeb.supertextiles.ChallanDetailsActivity.FOLD;
-import static com.areeb.supertextiles.ChallanDetailsActivity.NO_OF_DESIGNS;
+import static com.areeb.supertextiles.activities.ChallanDetailsActivity.CHALLAN_OBJECT;
 
 public class ChallanAdapter extends FirebaseRecyclerAdapter<Challan, ChallanAdapter.ChallanViewHolder> {
 
@@ -51,19 +41,15 @@ public class ChallanAdapter extends FirebaseRecyclerAdapter<Challan, ChallanAdap
 
         //challan list onClickListener
         holder.challanListCardView.setOnClickListener(v -> {
+            //initialize Gson object
+            Gson gson = new Gson();
+
+            //get Json string of Challan object
+            String challanJsonString = gson.toJson(model);
+
+            //send intent data to ChallanDetailsActivity
             Intent intent = new Intent(context, ChallanDetailsActivity.class);
-            intent.putExtra(CHALLAN_NO, model.getChallan_no());
-            intent.putExtra(CHALLAN_DATE, model.getDate());
-            intent.putExtra(PURCHASER, model.getPurchaser());
-            intent.putExtra(LOT_NO, model.getLot_no());
-            intent.putExtra(LR_NO, model.getLr_no());
-            intent.putExtra(DELIVERY_AT, model.getDelivery_at());
-            intent.putExtra(PURCHASER_GST, model.getPurchaser_gst());
-            intent.putExtra(QUALITY, model.getQuality());
-            intent.putExtra(TOTAL_PIECES, model.getTotal_pieces());
-            intent.putExtra(TOTAL_METERS, model.getTotal_meters());
-            intent.putExtra(FOLD, model.getFold());
-            intent.putExtra(NO_OF_DESIGNS, model.getNo_of_designs());
+            intent.putExtra(CHALLAN_OBJECT, challanJsonString);
             context.startActivity(intent);
         });
     }

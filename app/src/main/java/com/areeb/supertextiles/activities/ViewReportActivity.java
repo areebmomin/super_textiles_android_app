@@ -1,7 +1,4 @@
-package com.areeb.supertextiles;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.areeb.supertextiles.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,16 +7,26 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.areeb.supertextiles.AboutUs.getTextViewLongClickListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.areeb.supertextiles.R;
+import com.areeb.supertextiles.models.Report;
+import com.google.gson.Gson;
+
+import static com.areeb.supertextiles.activities.AboutUs.getTextViewLongClickListener;
 
 public class ViewReportActivity extends AppCompatActivity {
 
+    public static final String REPORT_OBJECT = "REPORT_OBJECT";
     TextView billNoReportValueTextView, dateReportValueTextView, reportChallanNoValueTextView, lotNoReportValueTextView,
             transportReportValueTextView, partyReportValueTextView, deliveryAddressReportValueTextView,
             piecesReportValueTextView, metersReportValueTextView, designNoReportValueTextView, amountReportValueTextView,
             rateReportValueTextView, GSTReportValueTextView, GSTAmountReportValueTextView, totalGSTReportValueTextView,
             commissionReportValueTextView, netAmountReportValueTextView, finalAmountReportValueTextView,
-            receivedAmountReportValueTextView, chequeNoReportValueTextView, chequeDateReportValueTextView;
+            receivedAmountReportValueTextView, chequeNoReportValueTextView, chequeDateReportValueTextView, discountPercentReportValueTextView;
+    Report report;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,43 @@ public class ViewReportActivity extends AppCompatActivity {
         receivedAmountReportValueTextView = findViewById(R.id.receivedAmountReportValueTextView);
         chequeNoReportValueTextView = findViewById(R.id.chequeNoReportValueTextView);
         chequeDateReportValueTextView = findViewById(R.id.chequeDateReportValueTextView);
+        discountPercentReportValueTextView = findViewById(R.id.discountPercentReportValueTextView);
+
+        //initialize Gson object
+        gson = new Gson();
+
+        //initialize Report object
+        report = new Report();
+
+        //get data from intent
+        if (getIntent() != null) {
+            report = gson.fromJson(getIntent().getStringExtra(REPORT_OBJECT), Report.class);
+
+            if (report != null) {
+                billNoReportValueTextView.setText(report.getBillNo());
+                dateReportValueTextView.setText(report.getDate());
+                reportChallanNoValueTextView.setText(report.getChallanNo());
+                lotNoReportValueTextView.setText(report.getLotNo());
+                transportReportValueTextView.setText(report.getTransport());
+                partyReportValueTextView.setText(report.getParty());
+                deliveryAddressReportValueTextView.setText(report.getDeliveryAddress());
+                piecesReportValueTextView.setText(report.getPieces());
+                metersReportValueTextView.setText(report.getMeters());
+                designNoReportValueTextView.setText(report.getDesignNo());
+                rateReportValueTextView.setText(report.getRate());
+                amountReportValueTextView.setText(report.getAmount());
+                discountPercentReportValueTextView.setText(report.getDiscountPercent());
+                commissionReportValueTextView.setText(report.getCommission());
+                netAmountReportValueTextView.setText(report.getNetAmount());
+                GSTAmountReportValueTextView.setText(report.getGstAmount());
+                GSTReportValueTextView.setText(report.getGstPercent());
+                totalGSTReportValueTextView.setText(report.getTotalGSTAmount());
+                finalAmountReportValueTextView.setText(report.getFinalAmount());
+                receivedAmountReportValueTextView.setText(report.getReceivedAmount());
+                chequeNoReportValueTextView.setText(report.getChequeNo());
+                chequeDateReportValueTextView.setText(report.getChequeDate());
+            }
+        }
     }
 
     @Override
@@ -95,6 +139,13 @@ public class ViewReportActivity extends AppCompatActivity {
         else if (title.equals(getString(R.string.edit_report))) {
             //goto EditReportActivity
             Intent intent = new Intent(ViewReportActivity.this, EditReportActivity.class);
+
+            //send intent data if report object is not null
+            if (report != null) {
+                String reportJson = gson.toJson(report);
+                intent.putExtra(REPORT_OBJECT, reportJson);
+            }
+
             startActivity(intent);
             finish();
         }

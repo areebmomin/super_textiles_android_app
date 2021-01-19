@@ -6,48 +6,207 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addBillParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".activities.EditReportActivity">
+        tools:context=".activities.AddBillActivity">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dateEditReportTextField"
+            android:id="@+id/billNoAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/date_text_field"
+            android:enabled="true"
+            android:hint="@string/bill_no_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/addBillTableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/partyEditReportTextField"
-            >
+            app:layout_constraintTop_toTopOf="parent">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date" />
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TableLayout
+            android:id="@+id/addBillTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@android:color/black"
+            android:stretchColumns="1"
+            app:layout_constraintBottom_toTopOf="@+id/challanNoAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/billNoAddBillTextField">
+            <!--           Heading row         -->
+            <TableRow
+                android:layout_margin="1dp"
+                android:background="@android:color/black">
+
+                <TextView
+                    android:layout_marginEnd="1dp"
+                    android:background="@android:color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/s_no"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:background="@android:color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/challan_no_column"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/challanNoAddBillTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:hint="@string/challan_no"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/dateAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addBillTableLayout">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@null"
+                android:inputType="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/partyEditReportTextField"
+            android:id="@+id/dateAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="true"
+            android:hint="@string/date_text_field"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/messersAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/challanNoAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="date"
+                android:onClick="selectDate"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/messersAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:enabled="false"
-            android:hint="@string/party_edit_report"
+            android:hint="@string/messers_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/addressAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/deliveryAddressEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/dateAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
+            android:hint="@string/address_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/purchaserGSTAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/messersAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="textPostalAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/purchaserGSTAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
+            android:hint="@string/purchaser_gstin_text_filed"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/contractNoAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contractNoAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/contract_no_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/datedAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/purchaserGSTAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -56,44 +215,62 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/deliveryAddressEditReportTextField"
+            android:id="@+id/datedAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/delivery_at_edit_report"
+            android:hint="@string/dated_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/brokerAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/partyEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/piecesEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/contractNoAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress" />
+                android:focusable="false"
+                android:inputType="date"
+                android:onClick="selectDated" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/piecesEditReportTextField"
+            android:id="@+id/brokerAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/pieces_edit_report"
+            android:hint="@string/broker_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/eWayBillNoAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/datedAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eWayBillNoAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/e_way_bill_no_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/deliveryAddressEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/metersEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/brokerAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -102,21 +279,64 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/metersEditReportTextField"
+            android:id="@+id/descriptionAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:enabled="false"
-            android:hint="@string/meters_edit_report"
+            android:hint="@string/description_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/noOfPiecesAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/piecesEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/rateEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/eWayBillNoAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/noOfPiecesAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
+            android:hint="@string/no_of_pieces_editBill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/quantityAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/quantityAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
+            android:hint="@string/quantity_mts_kgs_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/quantityDiscountAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noOfPiecesAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -125,21 +345,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/rateEditReportTextField"
+            android:id="@+id/quantityDiscountAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/rate_edit_report"
+            android:hint="@string/discount_on_quantity_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/quantityAfterDiscountAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/metersEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/challanNoEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/quantityAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -148,76 +366,50 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/challanNoEditReportTextField"
+            android:id="@+id/quantityAfterDiscountAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:enabled="false"
-            android:hint="@string/challan_no"
+            android:hint="@string/quantity_after_discount_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/rateAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rateEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/designNoEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/quantityDiscountAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/designNoEditReportTextField"
+            android:id="@+id/rateAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/design_no_text_field"
+            android:hint="@string/rate_per_mts_kgs_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/amountAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/challanNoEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/lotNoEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/quantityAfterDiscountAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lotNoEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/lot_no_text_field"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/designNoEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/amountEditReportTextField"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/amountEditReportTextField"
+            android:id="@+id/amountAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -227,10 +419,11 @@
             android:hint="@string/amount_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/totalAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lotNoEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/discountPercentEditReportTextField">
+            app:layout_constraintTop_toBottomOf="@id/rateAddBillTextField">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -238,43 +431,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/discountPercentEditReportTextField"
+            android:id="@+id/totalAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:enabled="false"
-            android:hint="@string/discount_edit_report"
+            android:hint="@string/total_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/discountAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/amountEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/commissionEditReportTextField">
+            app:layout_constraintTop_toBottomOf="@id/amountAddBillTextField">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/commissionEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:enabled="false"
-            android:hint="@string/commission_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/discountPercentEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/netAmountEditReportTextField"
-            >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -282,21 +453,207 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/netAmountEditReportTextField"
+            android:id="@+id/discountAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
+            android:hint="@string/discount_in_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/discountAmountAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/discountAmountAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
+            android:hint="@string/discount_amount_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/netAmountAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/discountAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/netAmountAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
             android:hint="@string/net_amount_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/SGSTAddBillTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/commissionEditReportTextField"
+            app:layout_constraintTop_toBottomOf="@id/discountAmountAddBillTextField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/SGSTAddBillTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/sgst_edit_bill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/netAmountAddBillTextField" />
+
+        <RadioGroup
+            android:id="@+id/SGSTRadioGroupAddBill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:checkedButton="@id/SGST25RadioButton"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/SGSTAddBillTextView"
+            app:layout_constraintTop_toBottomOf="@+id/netAmountAddBillTextField">
+
+            <RadioButton
+                android:id="@+id/SGST25RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setGST25Or5"
+                android:tag="2.5"
+                android:text="@string/_2_5_sgst_edit_bill" />
+
+            <RadioButton
+                android:id="@+id/SGST6RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setGST6Or12"
+                android:tag="6"
+                android:text="@string/_6_edit_bill" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/CGSTAddBillTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/cgst_edit_bill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SGSTAddBillTextView" />
+
+        <RadioGroup
+            android:id="@+id/CGSTRadioGroupAddBill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:checkedButton="@id/CGST25RadioButton"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/CGSTAddBillTextView"
+            app:layout_constraintTop_toBottomOf="@+id/SGSTAddBillTextView">
+
+            <RadioButton
+                android:id="@+id/CGST25RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setGST25Or5"
+                android:tag="2.5"
+                android:text="@string/_2_5_sgst_edit_bill" />
+
+            <RadioButton
+                android:id="@+id/CGST6RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setGST6Or12"
+                android:tag="6"
+                android:text="@string/_6_edit_bill" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/IGSTAddBillTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/igst_edit_bill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CGSTAddBillTextView" />
+
+        <RadioGroup
+            android:id="@+id/IGSTRadioGroupAddBill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="3dp"
+            android:checkedButton="@id/IGST5RadioButton"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/IGSTAddBillTextView"
+            app:layout_constraintTop_toBottomOf="@+id/CGSTAddBillTextView">
+
+            <RadioButton
+                android:id="@+id/IGST5RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="11dp"
+                android:onClick="setGST25Or5"
+                android:tag="5"
+                android:text="@string/_5_edit_bill" />
+
+            <RadioButton
+                android:id="@+id/IGST12RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setGST6Or12"
+                android:tag="12"
+                android:text="@string/_12_edit_bill" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/SGSTAmountAddBillTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:enabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/GSTEditReportTextField"
-            >
+            android:hint="@string/sgst_amount_edit_bill"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/CGSTAmountAddBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/IGSTAddBillTextView">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -304,43 +661,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/GSTEditReportTextField"
+            android:id="@+id/CGSTAmountAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:enabled="false"
-            android:hint="@string/gst_edit_report"
+            android:hint="@string/cgst_amount_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/IGSTAmountAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/netAmountEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/GSTAmountEditReportTextField">
+            app:layout_constraintTop_toBottomOf="@id/SGSTAmountAddBillTextField">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/GSTAmountEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/gst_amount_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GSTEditReportTextField"
-            android:enabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/totalGSTAmountEditReportTextField"
-            >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -348,159 +683,48 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/totalGSTAmountEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/total_gst_amount_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GSTAmountEditReportTextField"
-            android:enabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/finalAmountEditReportTextField"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/finalAmountEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/final_amount_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/totalGSTAmountEditReportTextField"
-            android:enabled="false"
-            app:layout_constraintBottom_toTopOf="@+id/receivedAmountEditReportTextField"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/receivedAmountEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/received_amount_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/finalAmountEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/chequeNoEditReportTextField"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/chequeNoEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/cheque_no_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/receivedAmountEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/chequeDateEditReportTextField"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/chequeDateEditReportTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/cheque_date_edit_report"
-            app:boxBackgroundColor="@android:color/transparent"
-            app:boxStrokeErrorColor="?attr/colorError"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chequeNoEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/billNoEditReportTextField"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:focusable="false"
-                android:onClick="selectDate"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/billNoEditReportTextField"
+            android:id="@+id/IGSTAmountAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:enabled="false"
-            android:hint="@string/bill_no_edit_bill"
+            android:hint="@string/igst_amount_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toTopOf="@+id/amountAfterTaxAddBillTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chequeDateEditReportTextField"
-            app:layout_constraintBottom_toTopOf="@+id/transportEditReportTextField"
-            >
+            app:layout_constraintTop_toBottomOf="@id/CGSTAmountAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/transportEditReportTextField"
+            android:id="@+id/amountAfterTaxAddBillTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:hint="@string/transport_edit_report"
+            android:enabled="false"
+            android:hint="@string/amount_after_tax_edit_bill"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/billNoEditReportTextField"
-            app:layout_constraintBottom_toBottomOf="parent"
-            >
+            app:layout_constraintTop_toBottomOf="@id/IGSTAmountAddBillTextField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

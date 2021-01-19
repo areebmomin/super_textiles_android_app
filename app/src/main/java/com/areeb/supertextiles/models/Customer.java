@@ -3,6 +3,7 @@ package com.areeb.supertextiles.models;
 public class Customer {
     private String id;
     private String name;
+    private String nameLowerCase;
     private String address;
     private String GSTNo;
 
@@ -41,5 +42,13 @@ public class Customer {
 
     public void setGSTNo(String GSTNo) {
         this.GSTNo = GSTNo;
+    }
+
+    public String getNameLowerCase() {
+        return nameLowerCase;
+    }
+
+    public void setNameLowerCase(String nameLowerCase) {
+        this.nameLowerCase = nameLowerCase;
     }
 }

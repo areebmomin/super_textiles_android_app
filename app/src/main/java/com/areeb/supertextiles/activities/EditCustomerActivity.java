@@ -1,7 +1,8 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.models.Customer;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -21,15 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.areeb.supertextiles.AddChallanActivity.showErrorInTextField;
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getAllCustomersReference;
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
-import static com.areeb.supertextiles.LoginActivity.hideSoftKeyboard;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_ADDRESS;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_DELIVERY_ADDRESS_LIST;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_GST_NO;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_ID;
-import static com.areeb.supertextiles.ViewCustomerActivity.CUSTOMER_NAME;
+import static com.areeb.supertextiles.activities.AddChallanActivity.showErrorInTextField;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getAllCustomersReference;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
+import static com.areeb.supertextiles.activities.LoginActivity.hideSoftKeyboard;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_ADDRESS;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_DELIVERY_ADDRESS_LIST;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_GST_NO;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_ID;
+import static com.areeb.supertextiles.activities.ViewCustomerActivity.CUSTOMER_NAME;
 
 public class EditCustomerActivity extends AppCompatActivity {
 
@@ -39,6 +41,7 @@ public class EditCustomerActivity extends AppCompatActivity {
     String customerID, customerName, customerAddress, customerGSTNo;
     ArrayList<String> deliveryAddressList;
     DatabaseReference editCustomerDatabaseReference, editDeliveryAddressDatabaseReference;
+    ConstraintLayout editCustomerParent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class EditCustomerActivity extends AppCompatActivity {
         GSTNoEditCustomerTextField = findViewById(R.id.GSTNoEditCustomerTextField);
         deliveryAddressEditCustomerTextField = findViewById(R.id.deliveryAddressEditCustomerTextField);
         editCustomerTableLayout = findViewById(R.id.editCustomerTableLayout);
+        editCustomerParent = findViewById(R.id.editCustomerParent);
 
         //initialize DatabaseReference
         editCustomerDatabaseReference = getAllCustomersReference();
@@ -148,6 +152,7 @@ public class EditCustomerActivity extends AppCompatActivity {
         //add values to customer object
         customer.setId(customerID);
         customer.setName(newName);
+        customer.setNameLowerCase(newName.toLowerCase());
         customer.setAddress(newAddress);
         customer.setGSTNo(newGST);
 
@@ -190,7 +195,7 @@ public class EditCustomerActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void addDeliveryAddressToTable (String deliveryAddress) {
         //initialize new row in table
-        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.add_customer_table_row, null);
+        TableRow tableRow = (TableRow) getLayoutInflater().inflate(R.layout.add_customer_table_row, editCustomerParent, false);
 
         //initialize TextView as Table column
         TextView SRNOTableColumn = tableRow.findViewById(R.id.SNoTableColumn);

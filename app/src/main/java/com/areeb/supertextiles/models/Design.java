@@ -10,7 +10,9 @@ public class Design {
 
     //default constructor
     public Design() {
-
+        design_no = " ";
+        design_color = " ";
+        meterList = new ArrayList<>();
     }
 
     public String getDesign_no() {

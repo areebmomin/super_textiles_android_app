@@ -1,4 +1,4 @@
-package com.areeb.supertextiles;
+package com.areeb.supertextiles.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,20 +11,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.areeb.supertextiles.activities.AddChallanActivity;
+import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.adapters.ChallanAdapter;
+import com.areeb.supertextiles.interfaces.SearchInChallan;
 import com.areeb.supertextiles.models.Challan;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
-import static com.areeb.supertextiles.FirebaseDatabaseHelper.getChallanListDatabaseReference;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getChallanListDatabaseReference;
 
-public class ChallansFragment extends Fragment {
+public class ChallansFragment extends Fragment implements SearchInChallan {
 
     FloatingActionButton addChallanButton;
     RecyclerView challansRecyclerView;
     ChallanAdapter challanAdapter;
     DatabaseReference challanListDatabaseReference;
+    FirebaseRecyclerOptions<Challan> challanOptions;
+    View fragmentView;
 
     public ChallansFragment() {
         // Required empty public constructor
@@ -50,7 +56,7 @@ public class ChallansFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //initialize fragment view
-        View fragmentView = inflater.inflate(R.layout.fragment_challans, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_challans, container, false);
 
         //initialize xml view
         addChallanButton = fragmentView.findViewById(R.id.addChallanButton);
@@ -84,5 +90,19 @@ public class ChallansFragment extends Fragment {
         super.onStop();
 
         challanAdapter.stopListening();
+    }
+
+    @Override
+    public void onSearchInChallan(Query firebaseSearchQuery,RecyclerView challansRecyclerView) {
+        if (challansRecyclerView != null) {
+            challanOptions = new FirebaseRecyclerOptions.Builder<Challan>()
+                    .setQuery(firebaseSearchQuery, Challan.class)
+                    .build();
+
+            challanAdapter = new ChallanAdapter(challanOptions, getContext());
+            challansRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            challansRecyclerView.setAdapter(challanAdapter);
+            challanAdapter.startListening();
+        }
     }
 }

@@ -7,9 +7,10 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editBillParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".EditBillActivity">
+        tools:context=".activities.EditBillActivity">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/billNoEditBillTextField"
@@ -24,7 +25,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/editBillTableLayout"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -34,27 +37,69 @@
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TableLayout
+            android:id="@+id/editBillTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@android:color/black"
+            android:stretchColumns="1"
+            app:layout_constraintBottom_toTopOf="@+id/challanNoEditBillTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/billNoEditBillTextField">
+            <!--           Heading row         -->
+            <TableRow
+                android:layout_margin="1dp"
+                android:background="@android:color/black">
+
+                <TextView
+                    android:layout_marginEnd="1dp"
+                    android:background="@android:color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/s_no"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:background="@android:color/white"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/challan_no_column"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/challanNoEditBillTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="@string/challan_no"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/billNoEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/editBillTableLayout"
+            app:layout_constraintBottom_toTopOf="@+id/dateEditBillTextField"
+            >
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:inputType="number" />
+                android:hint="@null"
+                android:inputType="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -64,18 +109,21 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
+            android:enabled="true"
             android:hint="@string/date_text_field"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/challanNoEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/challanNoEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/messersEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
+                android:onClick="selectDate"
                 android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +140,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/dateEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/addressEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -114,7 +164,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/messersEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/messersEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/purchaserGSTEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -136,7 +188,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/addressEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/addressEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/contractNoEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -158,7 +212,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/purchaserGSTEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/purchaserGSTEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/datedEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -178,14 +234,16 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contractNoEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/contractNoEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/brokerEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:focusable="false"
-                android:onClick="selectDate"
+                android:onClick="selectDated"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -201,7 +259,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/datedEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/datedEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/eWayBillNoEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -242,7 +302,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eWayBillNoEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/eWayBillNoEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/noOfPiecesEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -263,7 +325,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/descriptionEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/descriptionEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/quantityEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -284,7 +348,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/noOfPiecesEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/noOfPiecesEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/quantityDiscountEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -304,7 +370,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/quantityEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/quantityEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/quantityAfterDiscountEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -325,7 +393,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/quantityDiscountEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/quantityDiscountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/rateEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -345,7 +415,9 @@
             app:boxStrokeErrorColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/quantityAfterDiscountEditBillTextField">
+            app:layout_constraintTop_toBottomOf="@id/quantityAfterDiscountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/amountEditBillTextField"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -366,6 +438,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rateEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/totalEditBillTextField"
             android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -387,6 +460,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/amountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/discountEditBillTextField"
             android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -408,6 +482,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/totalEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/discountAmountEditBillTextField"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -429,6 +504,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/netAmountEditBillTextField"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -449,6 +525,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discountAmountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/SGSTEditBillTextView"
             android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -487,6 +564,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_2_5_sgst_edit_bill"
                 android:onClick="setGST25Or5"
+                android:tag="2.5"
                 />
 
             <RadioButton
@@ -495,6 +573,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_6_edit_bill"
                 android:onClick="setGST6Or12"
+                android:tag="6"
                 />
 
         </RadioGroup>
@@ -529,6 +608,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_2_5_sgst_edit_bill"
                 android:onClick="setGST25Or5"
+                android:tag="2.5"
                 />
 
             <RadioButton
@@ -537,6 +617,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_6_edit_bill"
                 android:onClick="setGST6Or12"
+                android:tag="6"
                 />
 
         </RadioGroup>
@@ -572,6 +653,7 @@
                 android:text="@string/_5_edit_bill"
                 android:layout_marginEnd="11dp"
                 android:onClick="setGST25Or5"
+                android:tag="5"
                 />
 
             <RadioButton
@@ -580,6 +662,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/_12_edit_bill"
                 android:onClick="setGST6Or12"
+                android:tag="12"
                 />
 
         </RadioGroup>
@@ -597,6 +680,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/IGSTEditBillTextView"
+            app:layout_constraintBottom_toTopOf="@+id/CGSTAmountEditBillTextField"
             android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -618,6 +702,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SGSTAmountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/IGSTAmountEditBillTextField"
             android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -639,6 +724,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/CGSTAmountEditBillTextField"
+            app:layout_constraintBottom_toTopOf="@+id/amountAfterTaxEditBillTextField"
             android:enabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
