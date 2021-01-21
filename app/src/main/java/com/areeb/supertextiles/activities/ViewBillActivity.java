@@ -1,8 +1,6 @@
 package com.areeb.supertextiles.activities;
 
-import android.Manifest;
-import android.content.ContentResolver;
-import android.content.ContentValues;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -13,7 +11,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
+import android.os.ParcelFileDescriptor;
+import android.provider.DocumentsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +23,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.models.Bill;
@@ -37,15 +34,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static com.areeb.supertextiles.activities.AboutUs.getTextViewLongClickListener;
+import static com.areeb.supertextiles.activities.ChallanDetailsActivity.CREATE_FILE;
 import static com.areeb.supertextiles.activities.ChallanDetailsActivity.MY_PERMISSIONS_REQUEST_STORAGE;
 import static com.areeb.supertextiles.activities.ChallanDetailsActivity.createStructureAndAddDataInChallanPDF;
-import static com.areeb.supertextiles.activities.ChallanDetailsActivity.galleryAddFile;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_1;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_2;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_3;
@@ -68,6 +65,7 @@ public class ViewBillActivity extends AppCompatActivity {
     Gson gson;
     MenuItem PDFMenuItem;
     View PDFOptionView;
+    PdfDocument document;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,15 +217,9 @@ public class ViewBillActivity extends AppCompatActivity {
             //replace PDF icon with progress bar
             item.setActionView(progressBar);
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    createBillPdf();
-                } else {
-                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_STORAGE);
-                }
-            } else {
-                createBillPdf();
-            }
+            //create bill
+            createBillPdf();
+
         } else if (title.equals(getString(R.string.edit_bill))) {
             //goto EditBillActivity
             Intent intent = new Intent(ViewBillActivity.this, EditBillActivity.class);
@@ -262,8 +254,33 @@ public class ViewBillActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        if (requestCode == CREATE_FILE && resultCode == Activity.RESULT_OK) {
+            Uri uri;
+            if (resultData != null && bill != null && bill.getBillNo() != null) {
+                uri = resultData.getData();
+
+                //enter challan data in PDF file
+                alterDocument(uri);
+
+                //show SnackBar on success
+                showPDFCreatedSnackBar(uri);
+            } else {
+                Toast.makeText(this, "Directory not created", Toast.LENGTH_SHORT).show();
+            }
+
+            //hide top progress bar
+            PDFMenuItem.setActionView(PDFOptionView);
+
+            document.close();
+        }
+    }
+
     private void createBillPdf() {
-        PdfDocument document = new PdfDocument();
+        document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(1300, 1900, 1).create();
         final PdfDocument.Page[] page = {null};
 
@@ -754,66 +771,48 @@ public class ViewBillActivity extends AppCompatActivity {
         bottomDescriptionYPosition += (int) (paint.descent() - paint.ascent());
         page.getCanvas().drawText(bottomDescriptionBillLine3, 70, bottomDescriptionYPosition, paint);
 
+        //finish document page
         document.finishPage(page);
 
+        //create new PDF file
+        createFile(Uri.parse(Environment.DIRECTORY_DOCUMENTS));
+    }
+
+    // Request code for creating a PDF document.
+    private void createFile(Uri pickerInitialUri) {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/pdf");
+        intent.putExtra(Intent.EXTRA_TITLE, "Bill No. " + bill.getBillNo() + ".pdf");
+
+        // Optionally, specify a URI for the directory that should be opened in
+        // the system file picker when your app creates the document.
+        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri);
+
+        startActivityForResult(intent, CREATE_FILE);
+    }
+
+    private void alterDocument(Uri uri) {
         try {
-            //create file directory
-            File superTextilesDirectory;
-            boolean isDirectoryCreated = true;
-            File challanPDFFile;
-            Uri fileUri = null;
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                superTextilesDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Super Textiles/Bills");
-
-                isDirectoryCreated = superTextilesDirectory.exists();
-                if (!isDirectoryCreated) {
-                    isDirectoryCreated = superTextilesDirectory.mkdirs();
-                }
-
-                if (isDirectoryCreated) {
-                    challanPDFFile = new File(superTextilesDirectory, "Bill No. " + bill.getBillNo() + ".pdf");
-                    fileUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", challanPDFFile);
-                    //create PDF file
-                    galleryAddFile(challanPDFFile.getPath(), this);
-                    document.writeTo(new FileOutputStream(challanPDFFile));
-                }
-            } else {
-                ContentResolver contentResolver = getContentResolver();
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.MediaColumns.DISPLAY_NAME, "Bill No. " + bill.getBillNo());
-                values.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
-                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Super Textiles/Bills/");
-                fileUri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
-                challanPDFFile = new File(String.valueOf(fileUri));
-                //create PDF file
-                galleryAddFile(challanPDFFile.getPath(), this);
-                document.writeTo(getContentResolver().openOutputStream(fileUri));
-            }
-
-            //create PDF file if directory is created successfully
-            if (isDirectoryCreated && bill != null && bill.getBillNo() != null) {
-
-                //hide top progress bar
-                PDFMenuItem.setActionView(PDFOptionView);
-
-                //show SnackBar on success
-                Uri finalFileUri = fileUri;
-                Snackbar snackbar = Snackbar.make(viewBillConstraintLayout, "PDF Created", Snackbar.LENGTH_LONG)
-                        .setAction("View", v -> {
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setDataAndType(finalFileUri, "application/pdf");
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            startActivity(intent);
-                        });
-                snackbar.show();
-            } else {
-                Toast.makeText(this, "Directory not created", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(this, "PDF not created", Toast.LENGTH_SHORT).show();
+            ParcelFileDescriptor pfd = getContentResolver().openFileDescriptor(uri, "w");
+            FileOutputStream fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
+            document.writeTo(fileOutputStream);
+            // Let the document provider know you're done by closing the stream.
+            fileOutputStream.close();
+            pfd.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        document.close();
+    }
+
+    private void showPDFCreatedSnackBar(Uri uri) {
+        Snackbar snackbar = Snackbar.make(viewBillConstraintLayout, "PDF Created", Snackbar.LENGTH_LONG)
+                .setAction("View", v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(uri, "application/pdf");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(intent);
+                });
+        snackbar.show();
     }
 }

@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -1028,8 +1029,14 @@ public class AddBillActivity extends AppCompatActivity {
         //add bill data in Report object
         report.setBillNo(bill.getBillNo());
         StringBuilder challanNoList = new StringBuilder();
-        for (String challanNo : bill.getChallanNo()) {
-            challanNoList.append(challanNo).append(", ");
+        Iterator<String> challanNoIterator = bill.getChallanNo().iterator();
+        while (challanNoIterator.hasNext()) {
+            String challanNo = challanNoIterator.next();
+            if (challanNoIterator.hasNext()) {
+                challanNoList.append(challanNo).append(", ");
+            } else {
+                challanNoList.append(challanNo);
+            }
         }
         report.setChallanNo(challanNoList.toString());
         report.setDate(bill.getDate());

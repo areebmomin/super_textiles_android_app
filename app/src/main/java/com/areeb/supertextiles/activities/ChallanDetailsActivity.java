@@ -1,8 +1,6 @@
 package com.areeb.supertextiles.activities;
 
-import android.Manifest;
-import android.content.ContentResolver;
-import android.content.ContentValues;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,12 +8,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
+import android.os.ParcelFileDescriptor;
+import android.provider.DocumentsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,8 +25,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import com.areeb.supertextiles.R;
 import com.areeb.supertextiles.models.Challan;
@@ -40,8 +36,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.areeb.supertextiles.activities.AboutUs.getTextViewLongClickListener;
@@ -65,6 +61,7 @@ public class ChallanDetailsActivity extends AppCompatActivity {
     public static final String DESIGN_3_OBJECT = "DESIGN_3_OBJECT";
     public static final String DESIGN_4_OBJECT = "DESIGN_4_OBJECT";
     public static final int MY_PERMISSIONS_REQUEST_STORAGE = 101;
+    public static final int CREATE_FILE = 1;
     TextView challanNoValueTextView, dateValueTextView, purchaserNameTextView, lotNoValueTextView, LRNoValueTextView,
             deliveryAtValueTextView, purchaserGSTValueTextView, qualityValueTextView, totalPiecesValueTextView,
             totalMetersValueTextView, foldValueTextView, designNo1ValueTextView, design1ColorValueTextView,
@@ -74,6 +71,7 @@ public class ChallanDetailsActivity extends AppCompatActivity {
     TableLayout designOneTableLayout, designTwoTableLayout, designThreeTableLayout, designFourTableLayout;
     ConstraintLayout challanDetailsConstraintLayout;
     Challan challan;
+    PdfDocument document;
     DatabaseReference designDataDatabaseReference;
     Design design1, design2, design3, design4;
     Gson gson;
@@ -586,19 +584,6 @@ public class ChallanDetailsActivity extends AppCompatActivity {
         }
     }
 
-    //add image to gallery
-    public static void galleryAddFile(String currPDFPath, Context context) {
-        File f = new File(currPDFPath);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            Uri contentUri = Uri.fromFile(f);
-            intent.setData(contentUri);
-            context.sendBroadcast(intent);
-        } else {
-            MediaScannerConnection.scanFile(context, new String[]{f.toString()}, new String[]{f.getName()}, null);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -758,15 +743,8 @@ public class ChallanDetailsActivity extends AppCompatActivity {
         String title = item.getTitle().toString();
 
         if (title.equals(getString(R.string.challan_pdf))) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    createChallanPdf();
-                } else {
-                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_STORAGE);
-                }
-            } else {
-                createChallanPdf();
-            }
+            //create challan
+            createChallanPdf();
         } else if (title.equals(getString(R.string.edit_challan))) {
             if (challan != null) {
                 Intent intent = new Intent(ChallanDetailsActivity.this, AddChallanActivity.class);
@@ -797,6 +775,28 @@ public class ChallanDetailsActivity extends AppCompatActivity {
             } else {
                 createChallanPdf();
             }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        if (requestCode == CREATE_FILE && resultCode == Activity.RESULT_OK) {
+            Uri uri;
+            if (resultData != null && challan != null && challan.getChallan_no() != null) {
+                uri = resultData.getData();
+
+                //enter challan data in PDF file
+                alterDocument(uri);
+
+                //show SnackBar on success
+                showPDFCreatedSnackBar(uri);
+            } else {
+                Toast.makeText(this, "Directory not created", Toast.LENGTH_SHORT).show();
+            }
+
+            document.close();
         }
     }
 
@@ -869,7 +869,7 @@ public class ChallanDetailsActivity extends AppCompatActivity {
     }
 
     private void createChallanPdf() {
-        PdfDocument document = new PdfDocument();
+        document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(1300, 1900, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
 
@@ -882,61 +882,45 @@ public class ChallanDetailsActivity extends AppCompatActivity {
 
         document.finishPage(page);
 
+        //create new PDF file
+        createFile(Uri.parse(Environment.DIRECTORY_DOCUMENTS));
+    }
+
+    // Request code for creating a PDF document.
+    private void createFile(Uri pickerInitialUri) {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/pdf");
+        intent.putExtra(Intent.EXTRA_TITLE, "Challan No. " + challan.getChallan_no() + ".pdf");
+
+        // Optionally, specify a URI for the directory that should be opened in
+        // the system file picker when your app creates the document.
+        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri);
+
+        startActivityForResult(intent, CREATE_FILE);
+    }
+
+    private void alterDocument(Uri uri) {
         try {
-            //create file directory
-            File superTextilesDirectory;
-            boolean isDirectoryCreated = true;
-            File challanPDFFile;
-            Uri fileUri = null;
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                superTextilesDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Super Textiles/Challans");
-
-                isDirectoryCreated = superTextilesDirectory.exists();
-                if (!isDirectoryCreated) {
-                    isDirectoryCreated = superTextilesDirectory.mkdirs();
-                }
-
-                if (isDirectoryCreated) {
-                    challanPDFFile = new File(superTextilesDirectory, "Challan No. " + challan.getChallan_no() + ".pdf");
-                    fileUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", challanPDFFile);
-                    //create PDF file
-                    galleryAddFile(challanPDFFile.getPath(), this);
-                    document.writeTo(new FileOutputStream(challanPDFFile));
-                }
-            } else {
-                ContentResolver contentResolver = getContentResolver();
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.MediaColumns.DISPLAY_NAME, "Challan No. " + challan.getChallan_no());
-                values.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
-                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Super Textiles/Challans/");
-                fileUri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
-                challanPDFFile = new File(String.valueOf(fileUri));
-                //create PDF file
-                galleryAddFile(challanPDFFile.getPath(), this);
-                document.writeTo(getContentResolver().openOutputStream(fileUri));
-            }
-
-            //create PDF file if directory is created successfully
-            if (isDirectoryCreated && challan != null && challan.getChallan_no() != null) {
-                //show SnackBar on success
-                Uri finalFileUri = fileUri;
-                Snackbar snackbar = Snackbar.make(challanDetailsConstraintLayout, "PDF Created", Snackbar.LENGTH_LONG)
-                        .setAction("View", v -> {
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setDataAndType(finalFileUri, "application/pdf");
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            startActivity(intent);
-                        });
-                snackbar.show();
-            } else {
-                Toast.makeText(this, "Directory not created", Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (Exception e) {
-            Toast.makeText(this, "PDF not created", Toast.LENGTH_SHORT).show();
+            ParcelFileDescriptor pfd = getContentResolver().openFileDescriptor(uri, "w");
+            FileOutputStream fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
+            document.writeTo(fileOutputStream);
+            // Let the document provider know you're done by closing the stream.
+            fileOutputStream.close();
+            pfd.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        document.close();
+    }
+
+    private void showPDFCreatedSnackBar(Uri uri) {
+        Snackbar snackbar = Snackbar.make(challanDetailsConstraintLayout, "PDF Created", Snackbar.LENGTH_LONG)
+                .setAction("View", v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(uri, "application/pdf");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(intent);
+                });
+        snackbar.show();
     }
 }
