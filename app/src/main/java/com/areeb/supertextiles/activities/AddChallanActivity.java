@@ -12,11 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.areeb.supertextiles.utilities.PreferenceManager;
 import com.areeb.supertextiles.R;
-import com.areeb.supertextiles.models.Bill;
 import com.areeb.supertextiles.models.Challan;
 import com.areeb.supertextiles.models.Design;
+import com.areeb.supertextiles.utilities.PreferenceManager;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,32 +41,18 @@ import static com.areeb.supertextiles.activities.ChallanDetailsActivity.NO_OF_DE
 import static com.areeb.supertextiles.activities.ChallanDetailsActivity.TOTAL_METERS;
 import static com.areeb.supertextiles.activities.ChallanDetailsActivity.TOTAL_PIECES;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.ADDRESS;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DATE;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DELIVERY_ADDRESS_REPORT;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESCRIPTION;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_1;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_2;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_3;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_4;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.DESIGN_NO_REPORT;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.GST_NO;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.ID;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.LOT_NO;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.MESSERS;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.METERS;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.NAME;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.NO_OF_PIECES;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.PARTY;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.PIECES;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.PURCHASER_GST;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.QUANTITY;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getAllCustomersReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getBillListDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getChallanNoDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDesignDataDatabaseReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getReportListDatabaseReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setBillDataInBillList;
+import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getQualityListDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setChallanDataInChallanList;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setChallanNoInDatabase;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setDesignDataInDatabase;
@@ -80,7 +65,7 @@ public class AddChallanActivity extends AppCompatActivity {
     Button addMetersButton, createChallanButton;
     PreferenceManager preferenceManager;
     DatabaseReference customersDatabaseReference, deliveryAddressDatabaseReference, challanNumberDatabaseReference;
-    AutoCompleteTextView purchaserAutoCompleteTextView, addressAutoCompleteTextView;
+    AutoCompleteTextView purchaserAutoCompleteTextView, addressAutoCompleteTextView, qualityAutoCompleteTextView;
     ArrayList<String> purchaserGSTNoList, purchaserIDList, purchaserAddressList;
     long challanNumber;
     int numberOfDesigns = 0;
@@ -124,6 +109,7 @@ public class AddChallanActivity extends AppCompatActivity {
         createChallanButton = findViewById(R.id.createChallanButton);
         purchaserAutoCompleteTextView = (AutoCompleteTextView) purchaserTextField.getEditText();
         addressAutoCompleteTextView  = (AutoCompleteTextView) deliveryAtTextField.getEditText();
+        qualityAutoCompleteTextView = (AutoCompleteTextView) qualityTextField.getEditText();
 
         //initialize preferenceManager
         preferenceManager = new PreferenceManager(this);
@@ -300,6 +286,31 @@ public class AddChallanActivity extends AppCompatActivity {
         } else {
             totalMetersFromIntent = null;
         }
+
+        //get quality list from database
+        getQualityListDatabaseReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //inflate deliveryAtTextField drop down
+                ArrayList<String> qualityList = new ArrayList<>();
+
+                //add all the address to address list
+                for (DataSnapshot qualitySnapShot : snapshot.getChildren()) {
+                    String quality = qualitySnapShot.getValue(String.class);
+                    qualityList.add(quality);
+                }
+
+                //initialize and set adapter
+                ArrayAdapter<String> addressAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.drop_down_list_item, qualityList);
+                if (qualityAutoCompleteTextView != null)
+                    qualityAutoCompleteTextView.setAdapter(addressAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                error.toException().printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -426,7 +437,6 @@ public class AddChallanActivity extends AppCompatActivity {
         qualityTextField.setErrorEnabled(false);
         totalPiecesTextField.setErrorEnabled(false);
         totalMetersTextField.setErrorEnabled(false);
-        foldTextField.setErrorEnabled(false);
 
         String data = Objects.requireNonNull(challanNoTextField.getEditText()).getText().toString();
         if (data.isEmpty()) {
@@ -480,12 +490,6 @@ public class AddChallanActivity extends AppCompatActivity {
         data = Objects.requireNonNull(totalMetersTextField.getEditText()).getText().toString();
         if (data.isEmpty()) {
             showErrorInTextField(totalMetersTextField, "Total Meters required");
-            return true;
-        }
-
-        data = Objects.requireNonNull(foldTextField.getEditText()).getText().toString();
-        if (data.isEmpty()) {
-            showErrorInTextField(foldTextField, "Fold required");
             return true;
         }
 

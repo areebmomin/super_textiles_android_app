@@ -25,6 +25,7 @@ public class FirebaseDatabaseHelper {
     public static final String ADDRESS = "address";
     public static final String CHALLAN_NO = "challan_no";
     public static final String CHALLAN_LIST = "challan_list";
+    public static final String QUALITY_LIST = "quality_list";
     public static final String DESIGN_DATA = "design_data";
     public static final String DESIGN_1 = "design_1";
     public static final String DESIGN_2 = "design_2";
@@ -35,19 +36,7 @@ public class FirebaseDatabaseHelper {
     public static final String METER_LIST = "meterList";
     public static final String BILL_NO = "bill_no";
     public static final String BILL_LIST = "bill_list";
-    public static final String DATE = "date";
-    public static final String MESSERS = "messers";
-    public static final String PURCHASER_GST = "purchaserGst";
-    public static final String DESCRIPTION = "description";
-    public static final String NO_OF_PIECES = "noOfPieces";
-    public static final String QUANTITY = "quantity";
     public static final String REPORT_LIST = "report_list";
-    public static final String LOT_NO = "lotNo";
-    public static final String PARTY = "party";
-    public static final String DELIVERY_ADDRESS_REPORT = "deliveryAddress";
-    public static final String PIECES = "pieces";
-    public static final String METERS = "meters";
-    public static final String DESIGN_NO_REPORT = "designNo";
     public static final String RECEIVED_AMOUNT = "receivedAmount";
     public static final String CHEQUE_NO = "chequeNo";
     public static final String CHEQUE_DATE = "chequeDate";
@@ -135,5 +124,10 @@ public class FirebaseDatabaseHelper {
     //get report list database reference
     public static DatabaseReference getReportListDatabaseReference() {
         return FirebaseDatabase.getInstance().getReference().child(REPORT_LIST);
+    }
+
+    //get quality list database reference
+    public static DatabaseReference getQualityListDatabaseReference() {
+        return FirebaseDatabase.getInstance().getReference().child(QUALITY_LIST);
     }
 }

@@ -39,7 +39,7 @@
     <string name="quality_text_field">Quality <font color='red'>*</font></string>
     <string name="total_pieces_text_filed">Total Pieces <font color='red'>*</font></string>
     <string name="total_meters_text_field">Total Meters <font color='red'>*</font></string>
-    <string name="fold_guaranteed_text_field">Fold/Guaranteed <font color='red'>*</font></string>
+    <string name="fold_guaranteed_text_field">Fold/Guaranteed</string>
     <string name="add_meters_button">Add Meters</string>
     <string name="create_button">CREATE</string>
     <string name="done">Done</string>
@@ -192,4 +192,7 @@
     <string name="bill_bottom_description_line_2">twice before dispatched. 3) If delivery of good is not taken within three days we have fully authority to</string>
     <string name="bill_bottom_description_line_3">deliver or not to deliver. 4) Goods once sold will not be taken back.</string>
     <string name="business_card_pdf_option">Business Card PDF</string>
+    <string name="qualities">Qualities</string>
+    <string name="quality_heading">Quality</string>
+    <string name="add_quality_edit_text">Add Quality</string>
 </resources>

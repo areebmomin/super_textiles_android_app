@@ -372,8 +372,21 @@ public class ViewReportActivity extends AppCompatActivity {
         //write challan no list
         yPosition += (paint.descent() - paint.ascent()) + 10;
         createNewPageAndResetValues(pageInfo, paint);
-        String challanNoString = "Challan No: " + report.getChallanNo();
-        page[0].getCanvas().drawText(challanNoString, 220, yPosition, paint);
+        String challanNoStringLine1 = "Challan No: " + report.getChallanNo();
+        if (challanNoStringLine1.length() > 70) {
+            String challanNoStringLine2 = challanNoStringLine1.substring(70);
+            challanNoStringLine1 = challanNoStringLine1.substring(0, 70);
+
+            //write line 1 for challan no
+            page[0].getCanvas().drawText(challanNoStringLine1, 220, yPosition, paint);
+
+            //write line 2 for challan no
+            yPosition += (paint.descent() - paint.ascent()) + 10;
+            page[0].getCanvas().drawText(challanNoStringLine2, 220, yPosition, paint);
+        }
+        else {
+            page[0].getCanvas().drawText(challanNoStringLine1, 220, yPosition, paint);
+        }
 
         //write lot number
         yPosition += (paint.descent() - paint.ascent()) + 10;
