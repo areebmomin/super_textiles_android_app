@@ -46,9 +46,7 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static com.areeb.supertextiles.activities.AddChallanActivity.showErrorInTextField;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.CHALLAN_NO;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getBillListDatabaseReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getBillNoDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getChallanListDatabaseReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setBillNoInDatabase;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setReportDataInReportList;
 
 public class AddBillActivity extends AppCompatActivity {
@@ -62,9 +60,7 @@ public class AddBillActivity extends AppCompatActivity {
             discountAmountAddBillTextField, netAmountAddBillTextField, SGSTAmountAddBillTextField,
             CGSTAmountAddBillTextField, IGSTAmountAddBillTextField, amountAfterTaxAddBillTextField;
     Calendar calendar;
-    DatabaseReference billNoDatabaseReference;
     DatabaseReference challanListDatabaseReference;
-    long billNumber;
     HashMap<String, Challan> challanHashMap;
     AutoCompleteTextView challanNoAutoCompleteTextView;
     ArrayList<String> challanNoList = new ArrayList<>();
@@ -156,25 +152,6 @@ public class AddBillActivity extends AppCompatActivity {
         description = " ";
         deliveryAddress = " ";
         lotNo = " ";
-
-        //fetch bill number from database when new challan is created
-        //get BILL_NO
-        billNoDatabaseReference = getBillNoDatabaseReference();
-        billNoDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //get bill number
-                billNumber = Long.parseLong(String.valueOf(snapshot.getValue()));
-
-                //set bill no to billNoEditText
-                Objects.requireNonNull(billNoAddBillTextField.getEditText()).setText(String.valueOf(billNumber));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                error.toException().printStackTrace();
-            }
-        });
 
         //get all challan data from database
         challanListDatabaseReference = getChallanListDatabaseReference();
@@ -543,9 +520,6 @@ public class AddBillActivity extends AppCompatActivity {
 
                 //add report object in database
                 createNewReportDataInDatabase(bill, lotNo, deliveryAddress, designNoListString.toString());
-
-                //increase bill no in database
-                setBillNoInDatabase(billNumber + 1);
 
                 Toast.makeText(this, "Bill Added", Toast.LENGTH_SHORT).show();
                 finish();

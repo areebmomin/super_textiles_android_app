@@ -1,18 +1,11 @@
 package com.areeb.supertextiles.utilities;
 
-import androidx.annotation.NonNull;
-
 import com.areeb.supertextiles.models.Bill;
 import com.areeb.supertextiles.models.Challan;
 import com.areeb.supertextiles.models.Design;
 import com.areeb.supertextiles.models.Report;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseDatabaseHelper {
 
@@ -34,7 +27,6 @@ public class FirebaseDatabaseHelper {
     public static final String DESIGN_COLOR = "design_color";
     public static final String DESIGN_NO = "design_no";
     public static final String METER_LIST = "meterList";
-    public static final String BILL_NO = "bill_no";
     public static final String BILL_LIST = "bill_list";
     public static final String REPORT_LIST = "report_list";
     public static final String RECEIVED_AMOUNT = "receivedAmount";
@@ -66,16 +58,6 @@ public class FirebaseDatabaseHelper {
         return FirebaseDatabase.getInstance().getReference().child(DELIVERY_ADDRESS).child(id);
     }
 
-    //get challan_no from Firebase Database
-    public static DatabaseReference getChallanNoDatabaseReference() {
-        return FirebaseDatabase.getInstance().getReference().child(CHALLAN_NO);
-    }
-
-    //set challan_no in Firebase Database
-    public static void setChallanNoInDatabase(long challanNumber) {
-        FirebaseDatabase.getInstance().getReference().child(CHALLAN_NO).setValue(challanNumber);
-    }
-
     //get CHALLAN_LIST DatabaseReference
     public static DatabaseReference getChallanListDatabaseReference() {
         return FirebaseDatabase.getInstance().getReference().child(CHALLAN_LIST);
@@ -94,16 +76,6 @@ public class FirebaseDatabaseHelper {
     //set designObject in DESIGN_DATA
     public static void setDesignDataInDatabase(String challanNo, String designNo, Design designObject) {
         FirebaseDatabase.getInstance().getReference().child(DESIGN_DATA).child(challanNo).child(designNo).setValue(designObject);
-    }
-
-    //get BILL_NO from Firebase Database
-    public static DatabaseReference getBillNoDatabaseReference() {
-        return FirebaseDatabase.getInstance().getReference().child(BILL_NO);
-    }
-
-    //set BILL_NO in Firebase Database
-    public static void setBillNoInDatabase(long billNo) {
-        FirebaseDatabase.getInstance().getReference().child(BILL_NO).setValue(billNo);
     }
 
     //set Bill data in BILL_LIST

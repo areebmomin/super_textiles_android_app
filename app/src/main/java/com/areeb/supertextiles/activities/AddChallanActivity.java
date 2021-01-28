@@ -49,12 +49,10 @@ import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.GST_NO;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.ID;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.NAME;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getAllCustomersReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getChallanNoDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDesignDataDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getQualityListDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setChallanDataInChallanList;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setChallanNoInDatabase;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.setDesignDataInDatabase;
 
 public class AddChallanActivity extends AppCompatActivity {
@@ -64,10 +62,10 @@ public class AddChallanActivity extends AppCompatActivity {
             deliveryAtTextField, purchaserGSTField, qualityTextField, totalPiecesTextField, totalMetersTextField, foldTextField;
     Button addMetersButton, createChallanButton;
     PreferenceManager preferenceManager;
-    DatabaseReference customersDatabaseReference, deliveryAddressDatabaseReference, challanNumberDatabaseReference;
+    DatabaseReference customersDatabaseReference;
+    DatabaseReference deliveryAddressDatabaseReference;
     AutoCompleteTextView purchaserAutoCompleteTextView, addressAutoCompleteTextView, qualityAutoCompleteTextView;
     ArrayList<String> purchaserGSTNoList, purchaserIDList, purchaserAddressList;
-    long challanNumber;
     int numberOfDesigns = 0;
     String totalMeters, totalMetersFromIntent, purchaserAddress;
     Design design1, design2, design3, design4;
@@ -145,7 +143,6 @@ public class AddChallanActivity extends AppCompatActivity {
                 //get challan number from intent
                 String challanNoString = challan.getChallan_no();
                 if (challanNoString != null) {
-                    challanNumber = Long.parseLong(challanNoString);
                     isThisEditChallan = true;
                 }
 
@@ -179,27 +176,6 @@ public class AddChallanActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        //fetch challan number from database when new challan is created
-        if (challan == null || challan.getChallan_no() == null) {
-            //get CHALLAN_NO
-            challanNumberDatabaseReference = getChallanNoDatabaseReference();
-            challanNumberDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    //get challan number
-                    challanNumber = Long.parseLong(String.valueOf(snapshot.getValue()));
-
-                    //set challan number in EditText
-                    Objects.requireNonNull(challanNoTextField.getEditText()).setText(String.valueOf(snapshot.getValue()));
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    error.toException().printStackTrace();
-                }
-            });
-        }
 
         //get all the customers from database
         customersDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -389,11 +365,6 @@ public class AddChallanActivity extends AppCompatActivity {
             boolean isChallanSaved = sendChallanDataToDatabase();
 
             if (isChallanSaved) {
-                //set next challan number if new challan is added
-                if (!isThisEditChallan) {
-                    //increase challan number in database
-                    setChallanNoInDatabase(challanNumber + 1);
-                }
                 //empty form
                 clearForm();
 
@@ -534,7 +505,7 @@ public class AddChallanActivity extends AppCompatActivity {
         Challan challan = new Challan();
 
         //convert challan number to String
-        String challanNumberString = String.valueOf(challanNumber);
+        String challanNumberString = Objects.requireNonNull(challanNoTextField.getEditText()).getText().toString();
 
         //add data to challan object
         challan.setChallan_no(challanNumberString);
