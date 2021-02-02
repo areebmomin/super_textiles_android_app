@@ -18,7 +18,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperTextiles">
-        <activity android:name=".activities.QualitiesActivity"></activity>
+        <activity android:name=".activities.QualitiesActivity" />
         <activity android:name=".activities.AddBillActivity" />
         <activity
             android:name=".activities.EditCustomerActivity"

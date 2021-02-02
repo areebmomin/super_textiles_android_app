@@ -566,8 +566,12 @@ public class EditBillActivity extends AppCompatActivity {
                 bill.setDiscountOnQuantity(Objects.requireNonNull(quantityDiscountEditBillTextField.getEditText()).getText().toString());
                 bill.setQuantityAfterDiscount(Objects.requireNonNull(quantityAfterDiscountEditBillTextField.getEditText()).getText().toString());
                 bill.setRate(Objects.requireNonNull(rateEditBillTextField.getEditText()).getText().toString());
-                bill.setAmount(Objects.requireNonNull(amountEditBillTextField.getEditText()).getText().toString());
-                bill.setTotal(Objects.requireNonNull(totalEditBillTextField.getEditText()).getText().toString());
+                double amountDouble = Double.parseDouble(Objects.requireNonNull(amountEditBillTextField.getEditText()).getText().toString());
+                String amountString = new DecimalFormat("#.##").format(amountDouble);
+                bill.setAmount(amountString);
+                double totalDouble = Double.parseDouble(Objects.requireNonNull(totalEditBillTextField.getEditText()).getText().toString());
+                String totalString = new DecimalFormat("#.##").format(totalDouble);
+                bill.setTotal(totalString);
                 bill.setDiscount(Objects.requireNonNull(discountEditBillTextField.getEditText()).getText().toString());
                 bill.setDiscountAmount(Objects.requireNonNull(discountAmountEditBillTextField.getEditText()).getText().toString());
                 bill.setNetAmount(Objects.requireNonNull(netAmountEditBillTextField.getEditText()).getText().toString());

@@ -314,19 +314,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //change password if credential is correct
-                changePassword(newPassword);
+                changePassword(newPassword, alertDialog, customLayout);
             });
 
             //code for negative button
             Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-            negativeButton.setOnClickListener(v -> {
-                //hide keyboard if open
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(customLayout.getWindowToken(), 0);
-
-                //close the dialog
-                alertDialog.dismiss();
-            });
+            negativeButton.setOnClickListener(v -> closeAlertDialog(alertDialog, customLayout));
         });
 
         //show dialog
@@ -334,14 +327,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //method to change password
-    private void changePassword(String password) {
+    private void changePassword(String password, AlertDialog alertDialog, View customLayout) {
         currentUser.updatePassword(password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        closeAlertDialog(alertDialog, customLayout);
                         Toast.makeText(this, "Password changed successfully", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show());
+    }
+
+    //method to close AlertDialog
+    private void closeAlertDialog(AlertDialog alertDialog, View customLayout) {
+        //hide keyboard if open
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(customLayout.getWindowToken(), 0);
+
+        //close the dialog
+        alertDialog.dismiss();
     }
 
 }

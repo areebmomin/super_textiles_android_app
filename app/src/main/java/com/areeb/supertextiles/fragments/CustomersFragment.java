@@ -5,6 +5,11 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -13,19 +18,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.areeb.supertextiles.activities.AddCustomerActivity;
 import com.areeb.supertextiles.R;
+import com.areeb.supertextiles.activities.AddCustomerActivity;
 import com.areeb.supertextiles.adapters.CustomersAdapter;
 import com.areeb.supertextiles.interfaces.SearchInCustomer;
 import com.areeb.supertextiles.models.Customer;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
@@ -33,10 +31,8 @@ import com.google.firebase.database.Query;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getAllCustomersReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getChallanListDatabaseReference;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getCustomerDatabaseReferenceByID;
 import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDeliveryAddressDatabaseReference;
-import static com.areeb.supertextiles.utilities.FirebaseDatabaseHelper.getDesignDataDatabaseReference;
 
 public class CustomersFragment extends Fragment implements SearchInCustomer {
 

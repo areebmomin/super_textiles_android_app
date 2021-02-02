@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -166,6 +167,9 @@ public class AddChallanActivity extends AppCompatActivity {
                 if (noOfDesignsString != null) {
                     numberOfDesigns = Integer.parseInt(noOfDesignsString);
                 }
+
+                //add purchaser from intent
+                purchaserAddress = challan.getPurchaser_address();
 
                 //get design data from intent and assign to design object
                 getDesignObjectFromIntent(getIntent());
@@ -518,7 +522,9 @@ public class AddChallanActivity extends AppCompatActivity {
         challan.setPurchaser_gst(Objects.requireNonNull(purchaserGSTField.getEditText()).getText().toString());
         challan.setQuality(Objects.requireNonNull(qualityTextField.getEditText()).getText().toString());
         challan.setTotal_pieces(Objects.requireNonNull(totalPiecesTextField.getEditText()).getText().toString());
-        challan.setTotal_meters(Objects.requireNonNull(totalMetersTextField.getEditText()).getText().toString());
+        double totalMetersDouble = Double.parseDouble(Objects.requireNonNull(totalMetersTextField.getEditText()).getText().toString());
+        String totalMeters = new DecimalFormat("#.##").format(totalMetersDouble);
+        challan.setTotal_meters(totalMeters);
         challan.setFold(Objects.requireNonNull(foldTextField.getEditText()).getText().toString());
         challan.setNo_of_designs(String.valueOf(numberOfDesigns));
         challan.setPurchaser_address(purchaserAddress);

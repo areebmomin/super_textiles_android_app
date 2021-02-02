@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.areeb.supertextiles.activities.AboutUs.getTextViewLongClickListener;
@@ -650,7 +651,9 @@ public class ChallanDetailsActivity extends AppCompatActivity {
                 purchaserGSTValueTextView.setText(challan.getPurchaser_gst());
                 qualityValueTextView.setText(challan.getQuality());
                 totalPiecesValueTextView.setText(challan.getTotal_pieces());
-                totalMetersValueTextView.setText(challan.getTotal_meters());
+                double totalMetersDouble = Double.parseDouble(challan.getTotal_meters());
+                String totalMeters = new DecimalFormat("#.##").format(totalMetersDouble);
+                totalMetersValueTextView.setText(totalMeters);
                 foldValueTextView.setText(challan.getFold());
 
                 //show design fields based on number_of_designs
